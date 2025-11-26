@@ -108,176 +108,309 @@ const SellerProductCreatePage = ({ setAddClick, categoryList }: sellerPageProps)
     })
 
     return (
-        <>
-            <p className="flex text-lg w-full">
+        <div className="w-full items-center justify-center">
+            <p className="flex text-sm w-full">
                 Create New Product
             </p>
             <form onSubmit={handleSubmit(onSubmit)} className="flex w-full h-auto">
-                <div className="flex flex-col gap-5 w-full h-auto">
-                    <div className="flex flex-col w-full justify-center">
-                        <div className='flex flex-col relative h-[9vh] shink-0'>
-                            <Controller
-                                name='title'
-                                control={control}
-                                render={({ field }) => (
-                                    <Input
-                                        {...field}
-                                        style={{ height: '45px' }}
-                                        placeholder="Enter the title of product."
-                                    />
-                                )}
-                            />
-                            <div className='absolute bottom-2 left-1 text-red-500/90 text-lg'>
-                                {errors.title?.message}
-                            </div>
-                        </div>
-                        <div className="flex flex-col relative h-[14vh] w-full shrink-0">
-                            <p className="text-lg px-2">Category Type</p>
-                            <Controller
-                                name='category'
-                                control={control}
-                                render={({ field }) => (
-                                    <Select
-                                        {...field}
-                                        mode="multiple"
-                                        allowClear
-                                        size="large"
-                                        className="w-full h-[10vh] shrink-0"
-                                        placeholder="Please select the category type."
-                                        optionFilterProp="label"
-                                        options={options}
-                                    />
-                                )}
-                            />
-                            <div className='absolute bottom-2 right-1 text-red-500/90 text-shadow-lg text-sm'>
-                                {errors.category?.message}
-                            </div>
-                        </div>
-                        <div className='flex flex-col relative h-[9vh] shirnk-0'>
-                            <p className="text-lg px-2">Product Published</p>
-                            <Controller
-                                name='isPublished'
-                                control={control}
-                                render={({ field }) => (
-                                    <Select
-                                        {...field}
-                                        className="w-full"
-                                        style={{ height: '45px' }}
-                                        defaultValue={true}
-                                        options={[
-                                            { value: true, label: 'True' },
-                                            { value: false, label: 'False' },
-                                        ]}
-                                    />
-                                )}
-                            />
-                            <div className='absolute bottom-2 left-1 text-red-500/90'>
-                                {errors.isPublished?.message}
-                            </div>
-                        </div>
-                        <div className="flex gap-2 w-full items-center justify-center">
-                            <div className='flex flex-col relative h-[14vh] shink-0 w-[40%]'>
-                                <p className="text-lg px-2">Currency</p>
+                <div className="flex flex-col gap-5 w-full h-auto items-center justify-center">
+                    <div className="flex flex-col w-full justify-center md:grid md:grid-cols-2 md:items-center md:justify-center md:gap-10">
+                        <div className="flex flex-col lg:h-[84vh] md:h-[75vh] border p-2 rounded-md border-violet-300">
+                            <div className='flex flex-col relative h-[9vh] shink-0'>
                                 <Controller
-                                    name='currency'
+                                    name='title'
                                     control={control}
                                     render={({ field }) => (
                                         <Input
                                             {...field}
                                             style={{ height: '45px' }}
-                                            placeholder="Enter the currency type."
+                                            placeholder="Enter the title of product."
                                         />
                                     )}
                                 />
-                                <div className='absolute bottom-2 left-1 text-red-500/90 text-lg'>
-                                    {errors.currency?.message}
+                                <div className='absolute bottom-2 left-1 text-red-500/90 text-sm'>
+                                    {errors.title?.message}
                                 </div>
                             </div>
-                            <div className='flex flex-col relative h-[14vh] shrink-0 w-[60%]'>
-                                <p className="text-lg px-2">Price</p>
+                            <div className="flex flex-col relative h-[14vh] w-full shrink-0">
+                                <p className="text-sm px-2">Category Type</p>
                                 <Controller
-                                    name='price'
+                                    name='category'
+                                    control={control}
+                                    render={({ field }) => (
+                                        <Select
+                                            {...field}
+                                            mode="multiple"
+                                            allowClear
+                                            size="large"
+                                            className="w-full h-[10vh] shrink-0"
+                                            placeholder="Please select the category type."
+                                            optionFilterProp="label"
+                                            options={options}
+                                        />
+                                    )}
+                                />
+                                <div className='absolute bottom-2 right-1 text-red-500/90 text-shadow-lg text-sm'>
+                                    {errors.category?.message}
+                                </div>
+                            </div>
+                            <div className='flex flex-col relative h-[9vh] shirnk-0'>
+                                <p className="text-sm px-2">Product Published</p>
+                                <Controller
+                                    name='isPublished'
+                                    control={control}
+                                    render={({ field }) => (
+                                        <Select
+                                            {...field}
+                                            className="w-full"
+                                            style={{ height: '45px' }}
+                                            defaultValue={true}
+                                            options={[
+                                                { value: true, label: 'True' },
+                                                { value: false, label: 'False' },
+                                            ]}
+                                        />
+                                    )}
+                                />
+                                <div className='absolute bottom-2 left-1 text-red-500/90'>
+                                    {errors.isPublished?.message}
+                                </div>
+                            </div>
+                            <div className="flex gap-2 w-full items-center justify-center">
+                                <div className='flex flex-col relative h-[14vh] shink-0 w-[40%]'>
+                                    <p className="text-sm px-2">Currency</p>
+                                    <Controller
+                                        name='currency'
+                                        control={control}
+                                        render={({ field }) => (
+                                            <Input
+                                                {...field}
+                                                style={{ height: '45px' }}
+                                                placeholder="Enter the currency type."
+                                            />
+                                        )}
+                                    />
+                                    <div className='absolute bottom-2 left-1 text-red-500/90 text-sm'>
+                                        {errors.currency?.message}
+                                    </div>
+                                </div>
+                                <div className='flex flex-col relative h-[14vh] shrink-0 w-[60%]'>
+                                    <p className="text-sm px-2">Price</p>
+                                    <Controller
+                                        name='price'
+                                        control={control}
+                                        render={({ field }) => (
+                                            <InputNumber
+                                                {...field}
+                                                style={{ height: '45px', width: '100%', alignContent: 'center' }}
+                                                placeholder="Enter price of product."
+                                            />
+                                        )}
+                                    />
+                                    <div className='absolute bottom-2 right-1 text-red-500/90'>
+                                        {errors.price?.message}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='flex flex-col relative h-[13vh] shrink-0 w-full'>
+                                <p className="text-sm px-2">Product Stock</p>
+                                <Controller
+                                    name='stock'
                                     control={control}
                                     render={({ field }) => (
                                         <InputNumber
                                             {...field}
                                             style={{ height: '45px', width: '100%', alignContent: 'center' }}
-                                            placeholder="Enter price of product."
+                                            placeholder="Enter number of stock."
                                         />
                                     )}
                                 />
-                                <div className='absolute bottom-2 right-1 text-red-500/90'>
-                                    {errors.price?.message}
+                                <div className='absolute bottom-2 left-1 text-red-500/90'>
+                                    {errors.stock?.message}
                                 </div>
                             </div>
-                        </div>
-                        <div className='flex flex-col relative h-[13vh] shrink-0 w-full'>
-                            <p className="text-lg px-2">Product Stock</p>
-                            <Controller
-                                name='stock'
-                                control={control}
-                                render={({ field }) => (
-                                    <InputNumber
-                                        {...field}
-                                        style={{ height: '45px', width: '100%', alignContent: 'center' }}
-                                        placeholder="Enter number of stock."
+                            <div className='flex flex-col relative h-auto mb-10'>
+                                <p className="text-sm px-2">Product Images</p>
+                                <Controller
+                                    name='images'
+                                    control={control}
+                                    render={({ field }) => (
+                                        <Upload
+                                            {...field}
+                                            listType="picture-card"
+                                            beforeUpload={() => false}
+                                            fileList={fileList}
+                                            onPreview={handlePreview}
+                                            onChange={handleChange}
+                                            className="bg-white rounded-xl justify-between items-center w-full"
+                                        >
+                                            {fileList.length >= 5 ? null : uploadButton}
+                                        </Upload>
+                                    )}
+                                />
+                                {previewImage && (
+                                    <Image
+                                        wrapperStyle={{ display: 'none' }}
+                                        preview={{
+                                            visible: previewOpen,
+                                            onVisibleChange: (visible) => setPreviewOpen(visible),
+                                            afterOpenChange: (visible) => !visible && setPreviewImage(''),
+                                        }}
+                                        src={previewImage}
                                     />
                                 )}
-                            />
-                            <div className='absolute bottom-2 left-1 text-red-500/90'>
-                                {errors.stock?.message}
-                            </div>
-                        </div>
-                        <div className='flex flex-col relative h-auto mb-10'>
-                            <p className="text-lg px-2">Product Images</p>
-                            <Controller
-                                name='images'
-                                control={control}
-                                render={({ field }) => (
-                                    <Upload
-                                        {...field}
-                                        listType="picture-card"
-                                        beforeUpload={() => false}
-                                        fileList={fileList}
-                                        onPreview={handlePreview}
-                                        onChange={handleChange}
-                                        className="bg-white rounded-xl justify-between items-center w-full"
-                                    >
-                                        {fileList.length >= 5 ? null : uploadButton}
-                                    </Upload>
-                                )}
-                            />
-                            {previewImage && (
-                                <Image
-                                    wrapperStyle={{ display: 'none' }}
-                                    preview={{
-                                        visible: previewOpen,
-                                        onVisibleChange: (visible) => setPreviewOpen(visible),
-                                        afterOpenChange: (visible) => !visible && setPreviewImage(''),
-                                    }}
-                                    src={previewImage}
-                                />
-                            )}
-                            <div className='absolute -bottom-9 left-1 text-red-500/90'>
-                                {errors.images?.message}
-                            </div>
-                        </div>
-                        {!moreDetails &&
-                            <div className="flex flex-col h-[10vh] shrink-0 items-center justify-center w-full gap-2 p-2">
-                                <div className="flex w-full">
-                                    <p className="text-lg font-semibold">
-                                        Add More Details
-                                    </p>
+                                <div className='absolute -bottom-9 left-1 text-red-500/90'>
+                                    {errors.images?.message}
                                 </div>
-                                <button onClick={() => setMoreDetails((prev) => !prev)} className="flex text-blue-500">
-                                    <AiOutlineDoubleRight className="rotate-90" size={35} />
-                                </button>
                             </div>
-                        }
-                        {moreDetails &&
+                        </div>
+                        <div className="md:hidden">
+                            {!moreDetails &&
+                                <div className="flex flex-col h-[10vh] shrink-0 items-center justify-center w-full gap-2 p-2">
+                                    <div className="flex w-full">
+                                        <p className="text-sm font-semibold">
+                                            Add More Details
+                                        </p>
+                                    </div>
+                                    <button onClick={() => setMoreDetails((prev) => !prev)} className="flex text-blue-500">
+                                        <AiOutlineDoubleRight className="rotate-90" size={35} />
+                                    </button>
+                                </div>
+                            }
+                            {moreDetails &&
+                                <div className="flex flex-col">
+                                    <div className='flex flex-col relative h-[9vh] shrink-0 w-full'>
+                                        <p className="text-sm px-2">Product Weight</p>
+                                        <Controller
+                                            name='weight'
+                                            control={control}
+                                            render={({ field }) => (
+                                                <InputNumber
+                                                    {...field}
+                                                    style={{ height: '45px', width: '100%', alignContent: 'center' }}
+                                                    placeholder="Enter weight of the product."
+                                                />
+                                            )}
+                                        />
+                                        <div className='absolute bottom-2 left-1 text-red-500/90'>
+                                            {errors.weight?.message}
+                                        </div>
+                                    </div>
+                                    <div className='flex flex-col relative h-auto shink-0 p-1'>
+                                        <p className="text-sm">Product Dimension</p>
+                                        <Controller
+                                            name='dimensions'
+                                            control={control}
+                                            render={({ field }) => (
+                                                <textarea
+                                                    {...field}
+                                                    value={field.value ?? ''}
+                                                    className="border p-2 rounded-md border-gray-400 bg-white h-[7vh]"
+                                                    placeholder="Enter the dimension of product."
+                                                />
+                                            )}
+                                        />
+                                        <div className='absolute bottom-2 left-1 text-red-500/90 text-sm'>
+                                            {errors.dimensions?.message}
+                                        </div>
+                                    </div>
+
+                                    <div className='flex flex-col relative h-auto shink-0 p-1'>
+                                        <p className="text-sm">Shipping Class Details</p>
+                                        <Controller
+                                            name='shippingClass'
+                                            control={control}
+                                            render={({ field }) => (
+                                                <textarea
+                                                    {...field}
+                                                    value={field.value ?? ''}
+                                                    className="border p-2 rounded-md border-gray-400 bg-white h-[10vh]"
+                                                    placeholder="Enter the shipping class details."
+                                                />
+                                            )}
+                                        />
+                                        <div className='absolute bottom-2 left-1 text-red-500/90 text-sm'>
+                                            {errors.shippingClass?.message}
+                                        </div>
+                                    </div>
+                                    {/* Product Variant Details */}
+                                    <div className='flex flex-col relative h-auto shink-0 p-1'>
+                                        <p className="text-sm">Product Variant Details</p>
+                                        <Controller
+                                            name='variants'
+                                            control={control}
+                                            render={({ field }) => (
+                                                <textarea
+                                                    {...field}
+                                                    value={field.value ?? ''}
+                                                    className="border p-2 rounded-md border-gray-400 bg-white h-[7vh]"
+                                                    placeholder="Enter product variant details."
+                                                />
+                                            )}
+                                        />
+                                        <div className='absolute bottom-2 left-1 text-red-500/90 text-sm'>
+                                            {errors.variants?.message}
+                                        </div>
+                                    </div>
+
+                                    {/* Product Attributes */}
+                                    <div className='flex flex-col relative h-auto shink-0 p-1'>
+                                        <p className="text-sm">Product Attributes</p>
+                                        <Controller
+                                            name='attributes'
+                                            control={control}
+                                            render={({ field }) => (
+                                                <textarea
+                                                    {...field}
+                                                    value={field.value ?? ''}
+                                                    className="border p-2 rounded-md border-gray-400 bg-white h-[8vh]"
+                                                    placeholder="Enter product attributes."
+                                                />
+                                            )}
+                                        />
+                                        <div className='absolute bottom-2 left-1 text-red-500/90 text-sm'>
+                                            {errors.attributes?.message}
+                                        </div>
+                                    </div>
+
+                                    {/* Product Description */}
+                                    <div className='flex flex-col relative h-auto shink-0 p-1'>
+                                        <p className="text-sm">Product Description</p>
+                                        <Controller
+                                            name='description'
+                                            control={control}
+                                            render={({ field }) => (
+                                                <textarea
+                                                    {...field}
+                                                    value={field.value ?? ''}
+                                                    className="border p-2 rounded-md border-gray-400 bg-white h-[15vh]"
+                                                    placeholder="Enter product description."
+                                                />
+                                            )}
+                                        />
+                                        <div className='absolute bottom-2 left-1 text-red-500/90 text-sm'>
+                                            {errors.description?.message}
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            {moreDetails &&
+                                <div className="flex flex-col h-[10vh] shrink-0 items-center justify-center w-full gap-2 p-2">
+                                    <div className="flex w-full">
+                                        <p className="text-sm font-semibold">
+                                            Less Details
+                                        </p>
+                                    </div>
+                                    <button onClick={() => setMoreDetails((prev) => !prev)} className="flex text-blue-500">
+                                        <AiOutlineDoubleRight className="-rotate-90" size={35} />
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                        <div className="md:block hidden lg:h-[84vh] md:h-[75vh] border p-2 rounded-md border-violet-300">
                             <div className="flex flex-col">
                                 <div className='flex flex-col relative h-[9vh] shrink-0 w-full'>
-                                    <p className="text-lg px-2">Product Weight</p>
+                                    <p className="text-sm px-2">Product Weight</p>
                                     <Controller
                                         name='weight'
                                         control={control}
@@ -294,7 +427,7 @@ const SellerProductCreatePage = ({ setAddClick, categoryList }: sellerPageProps)
                                     </div>
                                 </div>
                                 <div className='flex flex-col relative h-auto shink-0 p-1'>
-                                    <p className="text-lg">Product Dimension</p>
+                                    <p className="text-sm">Product Dimension</p>
                                     <Controller
                                         name='dimensions'
                                         control={control}
@@ -302,18 +435,18 @@ const SellerProductCreatePage = ({ setAddClick, categoryList }: sellerPageProps)
                                             <textarea
                                                 {...field}
                                                 value={field.value ?? ''}
-                                                className="border p-2 rounded-md border-gray-400 bg-white h-[7vh]"
+                                                className="border p-2 rounded-md border-gray-400 bg-white h-[7vh] resize-none"
                                                 placeholder="Enter the dimension of product."
                                             />
                                         )}
                                     />
-                                    <div className='absolute bottom-2 left-1 text-red-500/90 text-lg'>
+                                    <div className='absolute bottom-2 left-1 text-red-500/90 text-sm'>
                                         {errors.dimensions?.message}
                                     </div>
                                 </div>
 
                                 <div className='flex flex-col relative h-auto shink-0 p-1'>
-                                    <p className="text-lg">Shipping Class Details</p>
+                                    <p className="text-sm">Shipping Class Details</p>
                                     <Controller
                                         name='shippingClass'
                                         control={control}
@@ -321,18 +454,18 @@ const SellerProductCreatePage = ({ setAddClick, categoryList }: sellerPageProps)
                                             <textarea
                                                 {...field}
                                                 value={field.value ?? ''}
-                                                className="border p-2 rounded-md border-gray-400 bg-white h-[10vh]"
+                                                className="border p-2 rounded-md border-gray-400 bg-white h-[10vh] resize-none"
                                                 placeholder="Enter the shipping class details."
                                             />
                                         )}
                                     />
-                                    <div className='absolute bottom-2 left-1 text-red-500/90 text-lg'>
+                                    <div className='absolute bottom-2 left-1 text-red-500/90 text-sm'>
                                         {errors.shippingClass?.message}
                                     </div>
                                 </div>
                                 {/* Product Variant Details */}
                                 <div className='flex flex-col relative h-auto shink-0 p-1'>
-                                    <p className="text-lg">Product Variant Details</p>
+                                    <p className="text-sm">Product Variant Details</p>
                                     <Controller
                                         name='variants'
                                         control={control}
@@ -340,19 +473,19 @@ const SellerProductCreatePage = ({ setAddClick, categoryList }: sellerPageProps)
                                             <textarea
                                                 {...field}
                                                 value={field.value ?? ''}
-                                                className="border p-2 rounded-md border-gray-400 bg-white h-[7vh]"
+                                                className="border p-2 rounded-md border-gray-400 bg-white h-[7vh] resize-none"
                                                 placeholder="Enter product variant details."
                                             />
                                         )}
                                     />
-                                    <div className='absolute bottom-2 left-1 text-red-500/90 text-lg'>
+                                    <div className='absolute bottom-2 left-1 text-red-500/90 text-sm'>
                                         {errors.variants?.message}
                                     </div>
                                 </div>
 
                                 {/* Product Attributes */}
                                 <div className='flex flex-col relative h-auto shink-0 p-1'>
-                                    <p className="text-lg">Product Attributes</p>
+                                    <p className="text-sm">Product Attributes</p>
                                     <Controller
                                         name='attributes'
                                         control={control}
@@ -360,19 +493,19 @@ const SellerProductCreatePage = ({ setAddClick, categoryList }: sellerPageProps)
                                             <textarea
                                                 {...field}
                                                 value={field.value ?? ''}
-                                                className="border p-2 rounded-md border-gray-400 bg-white h-[8vh]"
+                                                className="border p-2 rounded-md border-gray-400 bg-white h-[8vh] resize-none"
                                                 placeholder="Enter product attributes."
                                             />
                                         )}
                                     />
-                                    <div className='absolute bottom-2 left-1 text-red-500/90 text-lg'>
+                                    <div className='absolute bottom-2 left-1 text-red-500/90 text-sm'>
                                         {errors.attributes?.message}
                                     </div>
                                 </div>
 
                                 {/* Product Description */}
                                 <div className='flex flex-col relative h-auto shink-0 p-1'>
-                                    <p className="text-lg">Product Description</p>
+                                    <p className="text-sm">Product Description</p>
                                     <Controller
                                         name='description'
                                         control={control}
@@ -380,31 +513,19 @@ const SellerProductCreatePage = ({ setAddClick, categoryList }: sellerPageProps)
                                             <textarea
                                                 {...field}
                                                 value={field.value ?? ''}
-                                                className="border p-2 rounded-md border-gray-400 bg-white h-[15vh]"
+                                                className="border p-2 rounded-md border-gray-400 bg-white h-[15vh] resize-none"
                                                 placeholder="Enter product description."
                                             />
                                         )}
                                     />
-                                    <div className='absolute bottom-2 left-1 text-red-500/90 text-lg'>
+                                    <div className='absolute bottom-2 left-1 text-red-500/90 text-sm'>
                                         {errors.description?.message}
                                     </div>
                                 </div>
                             </div>
-                        }
-                        {moreDetails &&
-                            <div className="flex flex-col h-[10vh] shrink-0 items-center justify-center w-full gap-2 p-2">
-                                <div className="flex w-full">
-                                    <p className="text-lg font-semibold">
-                                        Less Details
-                                    </p>
-                                </div>
-                                <button onClick={() => setMoreDetails((prev) => !prev)} className="flex text-blue-500">
-                                    <AiOutlineDoubleRight className="-rotate-90" size={35} />
-                                </button>
-                            </div>
-                        }
+                        </div>
                     </div>
-                    <div className="flex w-full h-[6vh]">
+                    <div className="flex w-full h-[6vh] lg:w-1/2">
                         {!isSubmitting &&
                             <button type="submit" className="flex w-full bg-green-950 h-full text-white header-title items-center justify-center rounded-md">
                                 CREATE PRODUCT
@@ -418,7 +539,7 @@ const SellerProductCreatePage = ({ setAddClick, categoryList }: sellerPageProps)
                     </div>
                 </div>
             </form >
-        </>
+        </div>
     )
 }
 

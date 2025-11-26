@@ -31,7 +31,8 @@ const appConfig = {
     web_token: process.env.JSON_WEB_TOKEN,
     activation_token: process.env.JSON_ACTIVATION_TOKEN,
     forget_password_token: process.env.JSON_FORGET_PASSWORD_TOKEN,
-    activation_link: process.env.ACTIVITION_LINK
+    activation_link: process.env.ACTIVITION_LINK,
+    forget_password: process.env.FORGET_PASSWORD_LINK
 }
 
 const khaltiConfig = {

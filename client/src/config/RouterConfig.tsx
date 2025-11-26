@@ -31,6 +31,7 @@ import CustomerLayoutPage from "../module/Customer/Layout/CustomerLayout"
 import CartViewPage from "../module/Customer/Cart/CartViewPage"
 import CustomerOrderItemsPage from "../module/Customer/OrderItem/OrderItemsPage"
 import PageNotFound from "../module/PageNotFound"
+import ActivateAccount from "../module/AuthPage/ActivateAccount"
 
 const router = createBrowserRouter([
     {
@@ -57,7 +58,8 @@ const router = createBrowserRouter([
             { path: 'login', Component: LoginPage },
             { path: 'register', Component: RegisterPage },
             { path: 'forget-password', Component: ForgetPassword },
-            { path: 'reset-password', Component: ResetPassword }
+            { path: 'reset-password', Component: ResetPassword },
+            {path: 'activate/account/:id', Component: ActivateAccount}
         ],
     },
     {

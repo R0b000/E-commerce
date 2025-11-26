@@ -7,7 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 import adminSvc from "../../../service/admin.service";
 import dayjs from "dayjs";
 import { ImSpinner9 } from "react-icons/im";
-import { type AdminCouponPageProps } from "./AdminCouponPage";
+import type { AdminCouponPageProps } from "./AdminCouponPage";
 
 const AdminCouponUpdatePage = () => {
     const { categoryList } = useOutletContext<AdminCouponPageProps>();
@@ -77,14 +77,14 @@ const AdminCouponUpdatePage = () => {
         <>
             {!isLoading &&
                 <>
-                    <p className="flex text-lg w-full mb-3 md:text-3xl">
+                    <p className="flex text-sm w-full mb-3 md:text-base">
                         Update Coupon
                     </p>
                     <form onSubmit={handleSubmit(() => onSubmit(id!))} className="flex w-full h-auto">
                         <div className="flex flex-col gap-5 w-full h-auto">
                             <div className="flex flex-col w-full justify-center">
                                 <div className='flex flex-col relative h-[9vh] shirnk-0'>
-                                    <p className="text-lg px-2 md:text-2xl">Coupon Type</p>
+                                    <p className="text-sm px-2 md:text-base">Coupon Type</p>
                                     <Controller
                                         name='discountType'
                                         control={control}
@@ -105,7 +105,7 @@ const AdminCouponUpdatePage = () => {
                                     </div>
                                 </div>
                                 <div className='flex flex-col relative h-[12vh] shink-0'>
-                                    <p className="text-lg px-2 md:text-2xl">Coupon Discount Value</p>
+                                    <p className="text-sm px-2 md:text-base">Coupon Discount Value</p>
                                     <Controller
                                         name='discountValue'
                                         control={control}
@@ -117,7 +117,7 @@ const AdminCouponUpdatePage = () => {
                                             />
                                         )}
                                     />
-                                    <div className='absolute bottom-2 left-1 text-red-500/90 text-lg'>
+                                    <div className='absolute bottom-2 left-1 text-red-500/90 text-sm'>
                                         {errors.discountValue?.message}
                                     </div>
                                 </div>

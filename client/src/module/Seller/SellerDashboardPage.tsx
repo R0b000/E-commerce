@@ -28,19 +28,19 @@ const SellerDashboardPage = () => {
         <>
             {!isLoading &&
                 <>
-                    <div className="flex w-full flex-col gap-4">
-                        <div className="flex w-full flex-col gap-4">
-                            <h1 className="flex header-title text-2xl bg-gray-100 rounded-md p-2 w-full h-[5vh] shrink-0 md:text-3xl md:h-[7vh] items-center">
-                                Dashboard
-                            </h1>
+                    <div className="flex w-full flex-col gap-4 items-center">
+                        <h1 className="flex header-title text-base bg-gray-100 rounded-md p-2 w-full h-[5vh] shrink-0 md:text-base md:h-[7vh] items-center">
+                            Dashboard
+                        </h1>
+                        <div className="flex w-full flex-col gap-4 lg:w-[67%]">
                             <div className="flex flex-col w-full h-[32vh] gap-2 items-center justify-center mt-3">
-                                <div className="flex h-[5vh] shirnk-0 header-title text-xl md:text-2xl">
+                                <div className="flex h-[5vh] shirnk-0 header-title text-base md:text-base">
                                     Categories List
                                 </div>
-                                <div className='flex overflow-x-auto scrollbar-hide px-3 mr-2 w-full'>
-                                    <div className='flex gap-4 w-full place-items-center '>
+                                <div className='flex overflow-x-auto no-scrollbar px-3 mr-2 w-full'>
+                                    <div className='flex gap-4 w-full place-items-center'>
                                         {categoryList?.data.map((item) => (
-                                            <div key={item._id} className="flex flex-col rounded-xl shrink-0 p-1 h-[25vh] w-[42vw] md:w-[33vw] text-xl font-semibold border-2 border-gray-500 place-items-center items-center justify-center">
+                                            <div key={item._id} className="flex flex-col rounded-xl shrink-0 p-1 h-[25vh] w-[42vw] md:w-[28vw] lg:w-[10vw] lg:h-full no-scrollbar text-base font-semibold border-2 border-gray-500 place-items-center items-center justify-center">
                                                 <div className='flex flex-col items-center justify-center'>
                                                     <img
                                                         src={item.image?.secure_url}
@@ -53,7 +53,7 @@ const SellerDashboardPage = () => {
                                         ))
                                         }
                                         {categoryList?.data.length === 0 &&
-                                            <div className="header-title md:text-2xl">
+                                            <div className="header-title md:text-base">
                                                 No Category Created
                                             </div>
                                         }
@@ -64,9 +64,9 @@ const SellerDashboardPage = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex flex-col w-full bg-gray-50">
-                            <div className="flex gap-2 w-full p-2 mt-2 bg-gray-200 h-[7vh]">
-                                <button onClick={() => navigate('/seller/product')} className="flex p-2 bg-green-950/80 rounded-md text-white text-xl header-title items-center justify-center w-full md:text-2xl md:h-[7vh]">Manage Product</button>
+                        <div className="flex flex-col w-full bg-gray-50 items-center justify-center">
+                            <div className="flex gap-2 w-full p-2 mt-2 bg-gray-200 h-[7vh] md:w-1/2 items-center justify-center">
+                                <button onClick={() => navigate('/seller/product')} className="flex p-2 bg-green-950/80 rounded-md text-white text-base header-title items-center justify-center w-full md:text-base md:h-[7vh]">Manage Product</button>
                             </div>
                         </div>
                     </div>

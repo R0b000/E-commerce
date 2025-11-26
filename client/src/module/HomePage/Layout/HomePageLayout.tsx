@@ -25,7 +25,7 @@ const HomePageLayout = () => {
     return (
         <>
             {!isLoading &&
-                <div style={{height: `${window.innerHeight}`, width: `${window.innerWidth}`}} className={`flex flex-col items-center justify-center overflow-x-clip ${menuClick && ""}`}>
+                <div className={`flex flex-col items-center justify-center w-full h-full overflow-x-clip ${menuClick && ""}`}>
                     <Outlet/>
                 </div>
             }

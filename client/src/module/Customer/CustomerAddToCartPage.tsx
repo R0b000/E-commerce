@@ -81,7 +81,7 @@ const CustomerAddToCartPage = ({ setCartClicked }: HomePageCartProps) => {
                                     <button type="button" onClick={() => {
                                         setQuantity((prev) => Math.max(1, (prev - 1)))
                                         setValue('items.quantity', quantity)
-                                    }} className="border border-gray-300 rounded-md w-[15vw] md:w-[9vw] items-center justify-center flex">
+                                    }} className="border cursor-pointer border-gray-300 rounded-md w-[15vw] md:w-[9vw] lg:w-[4vw] items-center justify-center flex">
                                         <AiOutlineMinus />
                                     </button>
                                     <Controller
@@ -110,7 +110,7 @@ const CustomerAddToCartPage = ({ setCartClicked }: HomePageCartProps) => {
                                             const newValue = Math.min(maxStock, quantity + 1)
                                             setQuantity(newValue)
                                             setValue('items.quantity', newValue)
-                                        }} className="border border-gray-300 rounded-md w-[15vw] md:w-[9vw] items-center justify-center flex"
+                                        }} className="border cursor-pointer border-gray-300 rounded-md w-[15vw] md:w-[9vw] lg:w-[4vw] items-center justify-center flex"
                                     >
                                         <AiOutlinePlus />
                                     </button>
@@ -129,7 +129,7 @@ const CustomerAddToCartPage = ({ setCartClicked }: HomePageCartProps) => {
                             </div>
                             <div className="flex gap-2 w-full ">
                                 {!isSubmitting &&
-                                    <button type="submit" className="flex bg-amber-500 text-base rounded-md w-full h-[6vh] text-white header-title items-center justify-center">
+                                    <button type="submit" className="flex cursor-pointer hover:scale-105 bg-amber-500 text-base rounded-md w-full h-[6vh] text-white header-title items-center justify-center">
                                         Add To Cart
                                     </button>
                                 }
@@ -141,7 +141,7 @@ const CustomerAddToCartPage = ({ setCartClicked }: HomePageCartProps) => {
                                 <button onClick={() => {
                                     navigate('/v1/home')
                                     setCartClicked(false)
-                                }} className="flex bg-amber-500 rounded-md w-full h-[6vh] text-white header-title items-center justify-center">
+                                }} className="flex bg-amber-500 cursor-pointer hover:scale-105 rounded-md w-full h-[6vh] text-white header-title items-center justify-center">
                                     Cancel
                                 </button>
                             </div>

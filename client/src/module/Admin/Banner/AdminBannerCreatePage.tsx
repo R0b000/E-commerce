@@ -90,10 +90,10 @@ const AdminBannerCreatePage = () => {
 
     return (
         <>
-            <p className="flex text-lg w-full md:text-2xl">
+            <p className="flex text-sm w-full md:text-base">
                 Create New Banner
             </p>
-            <form onSubmit={handleSubmit(onSubmit)} className="flex w-full h-auto md:text-2xl">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex w-full h-auto md:text-base">
                 <div className="flex flex-col gap-5 w-full h-auto">
                     <div className="flex flex-col w-full justify-center">
                         <div className='flex flex-col relative h-[9vh] shink-0'>
@@ -108,7 +108,7 @@ const AdminBannerCreatePage = () => {
                                     />
                                 )}
                             />
-                            <div className='absolute bottom-2 left-1 text-red-500/90 text-lg md:text-2xl'>
+                            <div className='absolute bottom-2 left-1 text-red-500/90 text-sm md:text-base'>
                                 {errors.title?.message}
                             </div>
                         </div>
@@ -147,7 +147,7 @@ const AdminBannerCreatePage = () => {
                             </div>
                         </div>
                         <div className='flex flex-col relative h-[9vh] shirnk-0'>
-                            <p className="text-lg px-2 md:text-2xl">Banner Type</p>
+                            <p className="text-sm px-2 md:text-base">Banner Type</p>
                             <Controller
                                 name='type'
                                 control={control}
@@ -169,7 +169,7 @@ const AdminBannerCreatePage = () => {
                             </div>
                         </div>
                         <div className='flex flex-col relative h-[9vh] shrink-0 w-full'>
-                            <p className="text-lg px-2 md:text-2xl">Banner Priority</p>
+                            <p className="text-sm px-2 md:text-base">Banner Priority</p>
                             <Controller
                                 name='priority'
                                 control={control}
@@ -186,7 +186,7 @@ const AdminBannerCreatePage = () => {
                             </div>
                         </div>
                         <div className='flex flex-col relative h-[9vh] shink-0'>
-                            <p className="text-lg px-2 md:text-2xl">Banner Active</p>
+                            <p className="text-sm px-2 md:text-base">Banner Active</p>
                             <Controller
                                 name='isActive'
                                 control={control}
@@ -206,8 +206,8 @@ const AdminBannerCreatePage = () => {
                                 {errors.isActive?.message}
                             </div>
                         </div>
-                        <div className='flex flex-col relative h-[13vh]'>
-                            <p className="text-lg md:text-2xl px-2">Banner Picture</p>
+                        <div className='flex flex-col relative h-[13vh] lg:h-[16vh]'>
+                            <p className="text-sm md:text-base px-2">Banner Picture</p>
                             <Controller
                                 name='image'
                                 control={control}
@@ -243,12 +243,12 @@ const AdminBannerCreatePage = () => {
                     </div>
                     <div className="flex w-full h-[6vh]">
                         {!isSubmitting &&
-                            <button type="submit" className="flex w-full bg-green-950 h-full md:text-3xl text-white header-title items-center justify-center rounded-md">
+                            <button type="submit" className="flex w-full bg-green-950 h-full md:text-base text-white header-title items-center justify-center rounded-md">
                                 CREATE BANNER
                             </button>
                         }
                         {isSubmitting &&
-                            < div className="flex w-full bg-green-950 h-full md:text-3xl text-white header-title items-center justify-center rounded-md">
+                            < div className="flex w-full bg-green-950 h-full md:text-base text-white header-title items-center justify-center rounded-md">
                                 <ImSpinner9 className="animate-spin" />
                             </div>
                         }

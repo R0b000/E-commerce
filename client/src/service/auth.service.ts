@@ -30,6 +30,11 @@ class authService {
             throw error
         }
     }
+
+    activateAccount = async (id: string) => {
+        const response = await axiosConfig.post(`/auth/activate/account/${id}`)
+        return response
+    }
 }
 
 const authSvc = new authService();
