@@ -24,19 +24,18 @@ class ReviewService {
     }
   };
 
-  getAllReview = async () => {
+  getReviewsByProductId = async (productId) => {
     try {
-      const getAllReview = await ReviewModel.find()
-        .populate("product")
-        .populate("user", "name email");
+      const reviews = await ReviewModel.find({ product: productId })
+        .populate("user", "name email avatar")
+        .sort({ createdAt: -1 });
 
-      return getAllReview;
+      return reviews;
     } catch (error) {
-      console.log("error on getting review", error);
+      console.log("Error fetching reviews for product:", error);
       throw error;
     }
   };
-
   updateReview = async (id, data) => {
     try {
       const updated = await ReviewModel.findByIdAndUpdate(id, data, {

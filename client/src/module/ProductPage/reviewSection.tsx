@@ -23,7 +23,6 @@ const ProductReviewSection = () => {
   const [submitting, setSubmitting] = useState(false);
   const [reviewText, setReviewText] = useState("");
 
-  // For editing
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editText, setEditText] = useState("");
 
@@ -46,7 +45,6 @@ const ProductReviewSection = () => {
     fetchReviews();
   }, [fetchReviews]);
 
-  // Submit new review
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!reviewText.trim()) return toast.error("Write something!");
@@ -77,13 +75,11 @@ const ProductReviewSection = () => {
     }
   };
 
-  // Start editing
   const startEdit = (review: Review) => {
     setEditingId(review._id);
     setEditText(review.body);
   };
 
-  // Save edited review
   const saveEdit = async (reviewId: string) => {
     if (!editText.trim()) return toast.error("Review cannot be empty");
 
@@ -113,7 +109,6 @@ const ProductReviewSection = () => {
     }
   };
 
-  // Delete review
   const deleteReview = async (reviewId: string) => {
     if (!confirm("Delete this review?")) return;
 
@@ -170,7 +165,6 @@ const ProductReviewSection = () => {
         Customer Reviews ({reviews.length})
       </h2>
 
-  
       {loggedInUser ? (
         <div className="mb-12 bg-gray-50 border rounded-xl p-6">
           <h3 className="text-lg font-semibold mb-4">Write a Review</h3>
@@ -204,7 +198,6 @@ const ProductReviewSection = () => {
         </div>
       )}
 
-   
       <div className="space-y-8">
         {reviews.length === 0 ? (
           <p className="text-center py-16 text-gray-500">
@@ -216,7 +209,6 @@ const ProductReviewSection = () => {
               key={review._id}
               className="flex gap-5 pb-8 border-b last:border-b-0"
             >
-              {/* Avatar */}
               <div className="shrink-0">
                 {review.user?.avatar ? (
                   <img
@@ -231,7 +223,6 @@ const ProductReviewSection = () => {
                 )}
               </div>
 
-       
               <div className="flex-1">
                 <div className="flex items-start justify-between">
                   <div>
@@ -242,7 +233,6 @@ const ProductReviewSection = () => {
                       {new Date(review.createdAt).toLocaleDateString()}
                     </p>
                   </div>
-
 
                   {isOwnReview(review.user._id) && (
                     <div className="flex gap-3 text-gray-600">
@@ -271,7 +261,6 @@ const ProductReviewSection = () => {
                   </span>
                 </div>
 
-               
                 {editingId === review._id ? (
                   <div className="mt-3">
                     <textarea
