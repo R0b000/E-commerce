@@ -23,7 +23,7 @@ const ProductReviewSection = () => {
   const [submitting, setSubmitting] = useState(false);
   const [reviewText, setReviewText] = useState("");
 
-  // For editing
+ 
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editText, setEditText] = useState("");
 
@@ -46,7 +46,7 @@ const ProductReviewSection = () => {
     fetchReviews();
   }, [fetchReviews]);
 
-  // Submit new review
+ 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!reviewText.trim()) return toast.error("Write something!");
@@ -77,13 +77,13 @@ const ProductReviewSection = () => {
     }
   };
 
-  // Start editing
+
   const startEdit = (review: Review) => {
     setEditingId(review._id);
     setEditText(review.body);
   };
 
-  // Save edited review
+ 
   const saveEdit = async (reviewId: string) => {
     if (!editText.trim()) return toast.error("Review cannot be empty");
 
@@ -113,7 +113,7 @@ const ProductReviewSection = () => {
     }
   };
 
-  // Delete review
+
   const deleteReview = async (reviewId: string) => {
     if (!confirm("Delete this review?")) return;
 

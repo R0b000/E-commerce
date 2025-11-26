@@ -42,7 +42,7 @@ class ReviewController {
 
   listSingleReview = async (req, res, next) => {
     try {
-      const {id }= req.params;
+      const { id } = req.params;
 
       const reviews = await reviewSvc.getSingleReview({ _id: id });
       //need to check for id
@@ -64,18 +64,23 @@ class ReviewController {
     }
   };
 
-  listReview = async (req, res, next) => {
+  listReview = async (req, res) => {
     try {
-      const getAllReview = await reviewSvc.getAllReview();
+      const productId = req.params.id;
 
-      res.json({
-        data: getAllReview,
-        code: 200,
-        status: "All review are here",
-        message: "Here is all your review",
+      const reviews = await reviewSvc.getReviewsByProductId(productId);
+
+      res.status(200).json({
+        success: true,
+        reviews,
+        total: reviews.length,
       });
     } catch (error) {
-      throw error;
+      res.status(500).json({
+        success: false,
+        message: "Failed to fetch reviews",
+        error: error.message,
+      });
     }
   };
 
