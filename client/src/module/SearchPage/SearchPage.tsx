@@ -79,7 +79,7 @@ const SearchPage = () => {
         <>
             {!isLoading &&
                 <div>
-                    <div className="flex flex-col gap-4 w-full h-full items-center justify-center lg:-mt-25 bg-red-300">
+                    <div className="flex flex-col gap-4 w-full h-full items-center justify-center lg:-mt-25">
                         <div className="flex w-full">
                             <div className="flex font-semibold text-2xl px-5 underline w-full h-[5vh] items-center md:-mt-8">
                                 Search Result: {searchValue}

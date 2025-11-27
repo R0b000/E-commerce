@@ -5,13 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import HeaderComponent from '../../component/Header';
 import { useAppContext } from "../../context/AppContext";
 import SearchPage from "../SearchPage/SearchPage";
-import NoProductFound from '../../assets/original-edbc9b1a905204e54ac50ca36215712a.webp'
 import Sidebar from "../../component/Sidebar";
 import CustomerAddToCartPage from "../Customer/CustomerAddToCartPage";
 import customerSvc from "../../service/customer.service";
 import Logo from '../../assets/mobile_logo.png'
 import { Empty } from 'antd';
-import { AiOutlineCloseCircle, AiOutlineRight, AiOutlineUser } from 'react-icons/ai';
+import { AiOutlineRight, AiOutlineUser } from 'react-icons/ai';
 import { MdDashboard } from 'react-icons/md';
 import { FaUserCircle } from 'react-icons/fa';
 
@@ -86,8 +85,6 @@ const HomePage = () => {
         listProducts();
     }, [loggedInUser])
 
-    const vw = window.innerWidth
-
     return (
         isLoading ?
             <div className="flex flex-col w-screen h-screen items-center justify-center">
@@ -158,13 +155,13 @@ const HomePage = () => {
                             </div>
                         </div>
                     }
-                    <div className={`${menuClick ? "w-full lg:w-[80vw] pointer-events-none" : ""}`}>
+                    <div className={`${menuClick ? "w-full lg:w-[80vw] lg:items-center lg:justify-center" : ""}`}>
                         {/*Main Content*/}
                         <div className={`flex flex-col p-2 lg:mt-2`}>
                             <div className={`${searchValue ? 'flex visible transition-all duration-300 h-full w-full items-center justify-center mt-[14vh]' : "hidden"}`}>
                                 <SearchPage />
                             </div>
-                            <div className='flex flex-col w-full h-auto lg:gap-3'>
+                            <div className='flex flex-col w-full h-auto lg:gap-3 lg:items-center lg:justify-center'>
                                 <div className={`${searchValue ? 'hidden' : "transition-all duration-300"}`}>
                                     <div className={`flex flex-col w-full lg:h-[50vh] md:h-[45vh] h-[29vh] overflow-clip ${searchClick ? "-mt-[4vh] md:-mt-[6vh] lg:mt-[1vh]" : "mt-[6vh]"} `}>
                                         <div className="flex w-full h-[30vh] md:h-[50vh] relative items-center justify-center shrink-0 overflow-clip">
@@ -193,13 +190,13 @@ const HomePage = () => {
                                         </>}
                                     </div>
                                 </div>
-                                <div className="flex flex-col items-center justify-center w-full h-auto">
-                                    <div className="flex flex-col w-[95vw] gap-3">
+                                <div className={`flex flex-col items-center justify-center h-auto ${menuClick ? 'lg:w-[75vw]' : 'w-full' }`}>
+                                    <div className={`flex flex-col gap-3 ${menuClick ? 'lg:w-[75vw]' : 'w-[95vw]' }`}>
                                         <h1 className="flex header-title text-xl md:text-xl">
                                             BEST SELLER
                                         </h1>
-                                        <div className="flex flex-col w-full gap-5">
-                                            <div className={`flex flex-col gap-2 items-center justify-center overflow-hidden md:grid md:grid-cols-3 ${menuClick ? 'lg:grid-cols-4 lg:w-[75vw] lg:items-center lg:justify-center' : 'lg:grid-cols-5 w-full'}`}>
+                                        <div className={`flex flex-col gap-5 ${menuClick ? 'lg:w-[75vw] lg:items-center lg:justify-center' : 'w-full' }`}>
+                                            <div className={`flex flex-col gap-2 items-center justify-center overflow-hidden md:grid md:grid-cols-3 ${menuClick ? 'lg:grid-cols-4' : 'lg:grid-cols-5 w-full'}`}>
                                                 {listProductDetails.length > 0 ? (
                                                     listProductDetails.map((item) => (
                                                         <div key={item._id}
@@ -326,22 +323,24 @@ const HomePage = () => {
                         © {new Date().getFullYear()} YourCompany. All rights reserved.
                     </div>
                 </div>
-                {menuClick && (
-                    <div
-                        onClick={() => setMenuClick(false)}
-                        className="fixed lg:hidden inset-0 bg-black/70 z-30 w-full h-full top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
-                    >
+                <div className='lg:hidden'>
+                    {menuClick && (
+                        <div
+                            onClick={() => setMenuClick(false)}
+                            className="fixed lg:hidden inset-0 bg-black/70 z-30 w-full h-full top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
+                        >
 
-                    </div>
-                )
-                }
-                {
-                    menuClick && (
-                        <div className="fixed top-1/2 lg:hidden -translate-y-1/2 left-1/2 z-30 -translate-x-1/2 text-justify p-4 pt-10 h-[70vh] w-[95vw] text-white font-bold text-xl title-header bg-black/50">
-                            <Sidebar />
                         </div>
                     )
-                }
+                    }
+                    {
+                        menuClick && (
+                            <div className="fixed top-1/2 lg:hidden -translate-y-1/2 left-1/2 z-30 -translate-x-1/2 text-justify p-4 pt-10 h-[70vh] w-[95vw] text-white font-bold text-xl title-header bg-black/50">
+                                <Sidebar />
+                            </div>
+                        )
+                    }
+                </div>
 
                 {
                     cartClicked &&

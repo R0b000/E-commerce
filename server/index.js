@@ -1,8 +1,9 @@
 const http = require('http');
 const app = require('./src/config/express.config');
+require('dotenv').config();
 
-const PORT = 8001
-const URL = `127.0.0.1`
+const PORT = process.env.PORT || 8001;
+const URL = `127.0.0.1` || process.env.URL
 
 const httpServer = http.createServer(app);
 

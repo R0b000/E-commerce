@@ -25,7 +25,7 @@ const CustomerCartPage = () => {
     const [onlinePayClick, setOnlinePayClick] = useState<boolean>(false)
     const [listProductDetails, setListProductDetails] = useState<ListProductDetails[]>([])
     const [searchParams] = useSearchParams();
-    const { loggedInUser, searchValue } = useAppContext();
+    const { loggedInUser, searchValue, menuClick } = useAppContext();
     const Id = searchParams.get('id')
     const navigate = useNavigate();
     const orderItem = searchParams.get('orderItem')
@@ -170,7 +170,7 @@ const CustomerCartPage = () => {
         <>
             {!isLoading &&
                 <>
-                    <div className={`${searchValue ? 'visible' : 'hidden'}`}>
+                    <div className={`${searchValue ? 'visible lg:mt-[17vh]' : 'hidden'}`}>
                         <SearchPage />
                     </div>
                     <div className={`flex flex-col w-full h-full gap-5 p-2 ${searchValue ? "hidden" : 'visible'}`}>
@@ -180,7 +180,7 @@ const CustomerCartPage = () => {
                             </h2>
                         </div>
                         {cartList?.data.length === 0 ?
-                            <div className="flex flex-col gap-5 w-full items-center justify-center">
+                            <div className={`flex flex-col gap-5 w-full items-center justify-center`}>
                                 <div className="flex flex-col w-full h-[35vh] shrink-0 items-center justify-center">
                                     <Empty />
                                 </div>
@@ -190,7 +190,7 @@ const CustomerCartPage = () => {
                                         Recommended Product
                                     </h2>
                                     <div className="flex flex-col w-full gap-5">
-                                        <div className="flex flex-col w-full gap-2 items-center justify-center overflow-hidden md:grid md:grid-cols-3 xl:grid-cols-5">
+                                        <div className={`flex flex-col w-full gap-2 items-center justify-center overflow-hidden md:grid md:grid-cols-3 ${menuClick ? 'lg:grid-cols-4' : 'lg:grid-cols-5'} `}>
                                             {listProductDetails.length > 0 ? (
                                                 listProductDetails.map((item) => (
                                                     <div key={item._id}
@@ -260,7 +260,7 @@ const CustomerCartPage = () => {
                                 </div>
                             </div>
                             :
-                            <div className="flex flex-col md:grid md:grid-cols-2 md:gap-3 lg:grid-cols-3 shrink-0">
+                            <div className={`flex flex-col md:grid md:grid-cols-2 md:gap-3 lg:grid-cols-3 shrink-0`}>
                                 {
                                     cartList?.data.map((items, index) => (
                                         <div key={index} onClick={() => {
