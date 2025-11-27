@@ -18,9 +18,9 @@ import { MdDashboard } from "react-icons/md"
 import { AiOutlineRight } from "react-icons/ai"
 
 export interface ProductCartProps {
-    setCartClicked: React.Dispatch<React.SetStateAction<boolean>>
-    setBuyClick: React.Dispatch<React.SetStateAction<boolean>>
-    buyClick: boolean
+  setCartClicked: React.Dispatch<React.SetStateAction<boolean>>;
+  setBuyClick: React.Dispatch<React.SetStateAction<boolean>>;
+  buyClick: boolean;
 }
 
 const ProductViewPage = () => {
@@ -60,56 +60,65 @@ const ProductViewPage = () => {
         }
     }, [review])
 
-    const fetchProductList = useCallback(async (id: string, signal?: AbortSignal) => {
-        try {
-            const response = await publicSvc.listProduct(id, signal);
-            setProductList(response.data.data)
+  const fetchProductList = useCallback(
+    async (id: string, signal?: AbortSignal) => {
+      try {
+        const response = await publicSvc.listProduct(id, signal);
+        setProductList(response.data.data);
 
-            if (loggedInUser?.role === 'customer') {
-                const response = await customerSvc.listCart();
-                setCartProductIds(() => response.data.data.map((items: any) => items?.items?.product?._id))
-            }
-        } catch (error) {
-            if ((error as any)?.name === 'CanceledError' || (error as any)?.message === 'canceled') return;
-            throw error
-        } finally {
-            if (!signal?.aborted) {
-                setIsLoading(false)
-            }
+        if (loggedInUser?.role === "customer") {
+          const response = await customerSvc.listCart();
+          setCartProductIds(() =>
+            response.data.data.map((items: any) => items?.items?.product?._id)
+          );
         }
-    }, [])
+      } catch (error) {
+        if (
+          (error as any)?.name === "CanceledError" ||
+          (error as any)?.message === "canceled"
+        )
+          return;
+        throw error;
+      } finally {
+        if (!signal?.aborted) {
+          setIsLoading(false);
+        }
+      }
+    },
+    []
+  );
 
-    const handleProductId = (id: string) => {
-        try {
-            setIsLoading(true);
-            navigate(`/v1/product/${id}`);
-        } catch (error) {
-            throw error
-        }
+  const handleProductId = (id: string) => {
+    try {
+      setIsLoading(true);
+      navigate(`/v1/product/${id}`);
+    } catch (error) {
+      throw error;
     }
+  };
 
-    const addToCartClick = (id: string) => {
-        try {
-            if (!loggedInUser) {
-                navigate('/auth/login');
-            }
-            setCartClicked(true)
-            navigate(`?id=${id}&type=cart`)
-        } catch (error) {
-            throw error
-        }
+  const addToCartClick = (id: string) => {
+    try {
+      if (!loggedInUser) {
+        navigate("/auth/login");
+      }
+      setCartClicked(true);
+      navigate(`?id=${id}&type=cart`);
+    } catch (error) {
+      throw error;
     }
+  };
 
-    const directPayment = async () => {
-        try {
-            setCartClicked(true)
-            navigate(`?id=${productDetails._id}&type=buy`)
-            setBuyClick(true)
-        } catch (error) {
-            console.log(error)
-            throw error
-        }
+  const directPayment = async () => {
+    try {
+      setCartClicked(true);
+      navigate(`?id=${productDetails._id}&type=buy`);
+      setBuyClick(true);
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
+  };
 
     const handleRouting = () => {
         if (loggedInUser?.role === 'admin') {
@@ -123,15 +132,19 @@ const ProductViewPage = () => {
         if (id) {
             const controller = new AbortController();
 
-            // trigger both requests and allow abort on cleanup
-            fetchProductDetails(id, controller.signal);
-            fetchProductList(id, controller.signal);
+      // trigger both requests and allow abort on cleanup
+      fetchProductDetails(id, controller.signal);
+      fetchProductList(id, controller.signal);
 
-            return () => controller.abort();
-        }
-    }, [id, fetchProductDetails, fetchProductList])
+      return () => controller.abort();
+    }
+  }, [id, fetchProductDetails, fetchProductList]);
 
-    return (
+  return (
+    <>
+      {isLoading ? (
+        ""
+      ) : (
         <>
             {isLoading ? "" :
                 <>
@@ -402,8 +415,24 @@ const ProductViewPage = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                      </>
+                                    ) : cartProductIds?.includes(item._id) ? (
+                                      <h2 className="flex w-full border-gray-400 bg-teal-400 text-sm rounded-md lg:w-[10vw] md:w-[20vw] md:h-[4vh] lg:h-[6vh] text-white p-2 font-semibold items-center justify-center transition-all duration-500 h-[6vh] header-title">
+                                        ADDED TO CART
+                                      </h2>
+                                    ) : (
+                                      <button
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          addToCartClick(item._id);
+                                        }}
+                                        className="flex w-full border-gray-400 bg-orange-400 text-sm rounded-md text-white p-2 font-semibold items-center justify-center transition-all duration-500 h-[6vh] header-title lg:w-[10vw] md:w-[20vw] md:h-[4vh] lg:h-[6vh]"
+                                      >
+                                        ADD TO CART
+                                      </button>
+                                    ))}
                                 </div>
+                              </div>
                             </div>
                         </div>
                         <div className="w-full bg-gray-900 text-gray-300 py-10 px-5">
@@ -482,7 +511,29 @@ const ProductViewPage = () => {
                                     className="fixed inset-0 w-full h-full bg-black/50 z-2"
                                 >
 
-                                </div>
+                {/* Bottom section */}
+                <div className="border-t border-gray-700 mt-8 pt-5 text-center text-sm text-gray-500">
+                  © {new Date().getFullYear()} YourCompany. All rights reserved.
+                </div>
+              </div>
+            </div>
+            {menuClick && (
+              <div
+                onClick={() => setMenuClick(false)}
+                className="fixed inset-0 bg-black/70 z-2 w-full h-full top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
+              ></div>
+            )}
+            {menuClick && (
+              <div className="fixed top-1/2 -translate-y-1/2 left-1/2 z-3 -translate-x-1/2 text-justify p-4 pt-10 h-[70vh] w-[95vw] text-white font-bold text-sm title-header bg-black/50">
+                <Sidebar />
+              </div>
+            )}
+            {cartClicked && (
+              <>
+                <div
+                  onClick={() => setCartClicked(false)}
+                  className="fixed inset-0 w-full h-full bg-black/50 z-2"
+                ></div>
 
                                 <div className="fixed top-1/2 -translate-y-1/2 left-1/2 z-3 -translate-x-1/2 text-justify p-4 h-[60vh] w-[90vw] md:w-[60vw] lg:w-[30vw] md:h-auto font-bold text-sm title-header bg-black/20 rounded-xl">
                                     <ProductRecommendAddToCartPage setCartClicked={setCartClicked} />
@@ -493,7 +544,9 @@ const ProductViewPage = () => {
                 </>
             }
         </>
-    )
-}
+      )}
+    </>
+  );
+};
 
-export default ProductViewPage
+export default ProductViewPage;
