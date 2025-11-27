@@ -49,15 +49,15 @@ const HeaderComponent = () => {
                 transition-transform duration-300 md:h-[10vh] md:shrink-0
                 ${hidden ? "-translate-y-full" : "translate-y-0"}
             `}>
-                <AiOutlineMenuUnfold className={`text-2xl  ${menuClick ? "hidden transition-all duration-300" : 'visible transition-all duration-300'}`} onClick={() => setMenuClick(true)} />
-                <AiOutlineMenuFold className={`text-2xl  ${menuClick ? "visible transition-all duration-300" : 'hidden transition-all duration-300'}`} onClick={() => setMenuClick(false)} />
+                <AiOutlineMenuUnfold className={`text-2xl cursor-pointer  ${menuClick ? "hidden transition-all duration-300" : 'visible transition-all duration-300'}`} onClick={() => setMenuClick(true)} />
+                <AiOutlineMenuFold className={`text-2xl cursor-pointer  ${menuClick ? "visible transition-all duration-300" : 'hidden transition-all duration-300'}`} onClick={() => setMenuClick(false)} />
                 <img src={MobileLogo} onClick={() => {
                     navigate('/v1/home')
-                }} alt="aurora-logo" className='h-[3vh] w-[27vw] md:w-auto md:h-[4vh]' />
+                }} alt="aurora-logo" className='h-[3vh] w-[27vw] md:w-auto md:h-[4vh] cursor-pointer' />
                 <div className="flex gap-4">
                     {!isShop &&
                         <IoMdSearch onClick={handleSearchClick}
-                            className={` text-2xl
+                            className={` text-2xl cursor-pointer
                                 ${searchClick ? "hidden" : ""}   
                             `}
                         />
@@ -65,10 +65,10 @@ const HeaderComponent = () => {
 
                     {loggedInUser === null &&
                         <>
-                            <LuShoppingCart className='text-2xl'
+                            <LuShoppingCart className='text-2xl cursor-pointer'
                                 onClick={handleCartClick}
                             />
-                            <AiOutlineShopping className='text-2xl'
+                            <AiOutlineShopping className='text-2xl cursor-pointer'
                                 onClick={() => {
                                     if (!loggedInUser) {
                                         navigate('/auth/login')
@@ -80,10 +80,10 @@ const HeaderComponent = () => {
 
                     {loggedInUser?.role === 'customer' &&
                         <>
-                            <LuShoppingCart className='text-2xl'
+                            <LuShoppingCart className='text-2xl cursor-pointer'
                                 onClick={handleCartClick}
                             />
-                            <AiOutlineShopping className='text-2xl'
+                            <AiOutlineShopping className='text-2xl cursor-pointer'
                                 onClick={() => {
                                     if (!loggedInUser) {
                                         navigate('/auth/login')
@@ -97,7 +97,7 @@ const HeaderComponent = () => {
             </div>
             {!isShop &&
                 <div className={`flex items-center justify-center mt-[6vh] lg:mt-[10vh] ${searchClick ? "h-[9vh] shrink-0" : "hidden"} `}>
-                    <div className="flex w-[90vw]">
+                    <div className="flex w-[90vw] z-50">
                         <Search
                             allowClear
                             size="large"

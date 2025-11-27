@@ -1,12 +1,12 @@
-const userPublicRouter = require("express").Router();
-const { userRoles } = require("../../config/const.config");
-const auth = require("../../middleware/auth.middleware");
-const authValidator = require("../../middleware/validation.middleware");
-const categoryCtrl = require("../category/category.controller");
-const orderItemsCtrl = require("../orderItems/orderItems.controller");
-const productCtrl = require("../product/product.controller");
-const reviewCtrl = require("../review/review.controller");
-const reviewValidation = require("../review/review.validation");
+const userPublicRouter = require('express').Router();
+const { userRoles } = require('../../config/const.config');
+const auth = require('../../middleware/auth.middleware');
+const authValidator = require('../../middleware/validation.middleware');
+const categoryCtrl = require('../category/category.controller');
+const orderItemsCtrl = require('../orderItems/orderItems.controller');
+const productCtrl = require('../product/product.controller');
+const reviewCtrl = require('../review/review.controller');
+const reviewValidation = require('../review/review.validation');
 
 //public Rotue
 userPublicRouter.get("/products", productCtrl.listProduct);
@@ -39,39 +39,41 @@ userPublicRouter.post(
   orderItemsCtrl.khaltPaymentCheckout
 );
 
+//Review system
 userPublicRouter.post(
-  "/products/:id/review",
-  auth(userRoles.CUSTOMER),
-  authValidator(reviewValidation),
-  reviewCtrl.createReview
+    "/products/:id/review",
+    auth(userRoles.CUSTOMER),
+    authValidator(reviewValidation),
+    reviewCtrl.createReview
 );
 userPublicRouter.get(
-  "/review/:id",
-  authValidator(reviewValidation),
-  reviewCtrl.listSingleReview
+    "/review/:id",
+    authValidator(reviewValidation),
+    reviewCtrl.listSingleReview
 );
 userPublicRouter.get(
-  "/review",
-  auth(userRoles.ADMIN),
-  authValidator(reviewValidation),
-  reviewCtrl.listReview
+    "/review",
+    auth(userRoles.ADMIN),
+    authValidator(reviewValidation),
+    reviewCtrl.listReview
 );
 
 userPublicRouter.get(
-  "/products/:id/review",
-  authValidator(reviewValidation),
-  reviewCtrl.listReview
+    "/products/:id/review",
+    authValidator(reviewValidation),
+    reviewCtrl.listReview
 );
 userPublicRouter.put(
-  "/products/:id/review/:id",
-  auth(userRoles.CUSTOMER),
-  authValidator(reviewValidation),
-  reviewCtrl.updateReview
+    "/products/:id/review/:id",
+    auth(userRoles.CUSTOMER),
+    authValidator(reviewValidation),
+    reviewCtrl.updateReview
 );
 userPublicRouter.delete(
-  "/products/:id/review/:id",
-  auth(userRoles.CUSTOMER),
-  authValidator(reviewValidation),
-  reviewCtrl.deletedReview
+    "/products/:id/review/:id",
+    auth(userRoles.CUSTOMER),
+    authValidator(reviewValidation),
+    reviewCtrl.deletedReview
 );
-module.exports = userPublicRouter;
+
+module.exports = userPublicRouter

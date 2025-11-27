@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import type { CartResponse } from "./cart.validation"
 import customerSvc from "../../../service/customer.service"
 import { AiOutlineClose, AiOutlineDelete, AiOutlineEdit } from "react-icons/ai"
@@ -9,7 +9,11 @@ import type { ListProductDetails } from "../../HomePage/homepage.validation"
 import publicSvc from "../../../service/public.service"
 import { useAppContext } from "../../../context/AppContext"
 import SearchPage from "../../SearchPage/SearchPage"
-import CustomerAddToCartPage from "../CustomerAddToCartPage"
+import CustomerAddCartPage from "./CustomerAddCartPage"
+
+export interface CustomerCartPageProps {
+    setAddCartClick: React.Dispatch<React.SetStateAction<boolean>>
+}
 
 const CustomerCartPage = () => {
     const [cartList, setCartList] = useState<CartResponse | null>(null)
@@ -21,7 +25,7 @@ const CustomerCartPage = () => {
     const [onlinePayClick, setOnlinePayClick] = useState<boolean>(false)
     const [listProductDetails, setListProductDetails] = useState<ListProductDetails[]>([])
     const [searchParams] = useSearchParams();
-    const { loggedInUser, searchValue } = useAppContext();
+    const { loggedInUser, searchValue, menuClick } = useAppContext();
     const Id = searchParams.get('id')
     const navigate = useNavigate();
     const orderItem = searchParams.get('orderItem')
@@ -166,7 +170,7 @@ const CustomerCartPage = () => {
         <>
             {!isLoading &&
                 <>
-                    <div className={`${searchValue ? 'visible' : 'hidden'}`}>
+                    <div className={`${searchValue ? 'visible lg:mt-[17vh]' : 'hidden'}`}>
                         <SearchPage />
                     </div>
                     <div className={`flex flex-col w-full h-full gap-5 p-2 ${searchValue ? "hidden" : 'visible'}`}>
@@ -176,7 +180,7 @@ const CustomerCartPage = () => {
                             </h2>
                         </div>
                         {cartList?.data.length === 0 ?
-                            <div className="flex flex-col gap-5 w-full items-center justify-center">
+                            <div className={`flex flex-col gap-5 w-full items-center justify-center`}>
                                 <div className="flex flex-col w-full h-[35vh] shrink-0 items-center justify-center">
                                     <Empty />
                                 </div>
@@ -186,7 +190,7 @@ const CustomerCartPage = () => {
                                         Recommended Product
                                     </h2>
                                     <div className="flex flex-col w-full gap-5">
-                                        <div className="flex flex-col w-full gap-2 items-center justify-center overflow-hidden md:grid md:grid-cols-3 xl:grid-cols-5">
+                                        <div className={`flex flex-col w-full gap-2 items-center justify-center overflow-hidden md:grid md:grid-cols-3 ${menuClick ? 'lg:grid-cols-4' : 'lg:grid-cols-5'} `}>
                                             {listProductDetails.length > 0 ? (
                                                 listProductDetails.map((item) => (
                                                     <div key={item._id}
@@ -202,10 +206,10 @@ const CustomerCartPage = () => {
                                                             <div className="absolute w-full bg-gray-100 flex flex-col gap-2 text-sm md:text-sm  rounded-xl font-semibold text-black h-auto overflow-hidden z-10 p-2 pointer-event-none">
                                                                 {item.title}
                                                             </div>
-                                                            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex w-[50vw] items-center justify-center z-20">
+                                                            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center justify-center z-20">
                                                                 {(loggedInUser?.role === 'admin' || loggedInUser?.role === 'seller') &&
                                                                     <>
-                                                                        <div className="flex h-[5vh] bg-amber-500 rounded-md items-center justify-center text-white md:text-sm lg:w-[10vw] md:w-[20vw] md:h-[4vh] lg:h-[6vh]">
+                                                                        <div className="flex w-[27vw] h-[5vh] bg-amber-500 rounded-md items-center justify-center text-white md:text-sm lg:w-[10vw] md:w-[20vw] md:h-[4vh] lg:h-[6vh]">
                                                                             <h2 className="text-sm">
                                                                                 Qty: {item.stock}
                                                                             </h2>
@@ -215,7 +219,7 @@ const CustomerCartPage = () => {
 
                                                                 {(loggedInUser?.role === 'customer' || loggedInUser === null) && (item.stock === 0 ?
                                                                     <>
-                                                                        <div className="flex h-[6vh] bg-amber-300 rounded-md items-center justify-center text-red-900 lg:w-[10vw] md:w-[20vw] md:h-[4vh] lg:h-[6vh]">
+                                                                        <div className="flex w-[27vw] h-[6vh] bg-amber-300 rounded-md items-center justify-center text-red-900 lg:w-[10vw] md:w-[20vw] md:h-[4vh] lg:h-[6vh]">
                                                                             <h2 className="text-sm">
                                                                                 OUT OF STOCK
                                                                             </h2>
@@ -223,14 +227,14 @@ const CustomerCartPage = () => {
                                                                     </>
                                                                     :
                                                                     (cartProductIds?.includes(item._id) ?
-                                                                        <h2 className="flex border-gray-400 bg-teal-400 text-sm rounded-md lg:w-[10vw] md:w-[20vw] md:h-[4vh] lg:h-[6vh] text-white p-2 font-semibold items-center justify-center transition-all duration-500 h-[6vh] header-title">ADDED TO CART</h2>
+                                                                        <h2 className="flex w-[27vw] border-gray-400 bg-teal-400 text-sm rounded-md lg:w-[10vw] md:w-[20vw] md:h-[4vh] lg:h-[6vh] text-white p-2 font-semibold items-center justify-center transition-all duration-500 h-[6vh] header-title">ADDED TO CART</h2>
                                                                         :
                                                                         <button
                                                                             onClick={(e) => {
                                                                                 e.stopPropagation();
                                                                                 addToCartClick(item._id)
                                                                             }}
-                                                                            className="flex cursor-pointer hover:scale-110 border-gray-400 bg-orange-400 text-sm rounded-md text-white p-2 font-semibold items-center justify-center transition-all duration-500 h-[6vh] header-title lg:w-[10vw] md:w-[20vw] md:h-[4vh] lg:h-[6vh]">
+                                                                            className="flex w-[27vw] cursor-pointer hover:scale-110 border-gray-400 bg-orange-400 text-sm rounded-md text-white p-2 font-semibold items-center justify-center transition-all duration-500 h-[6vh] header-title lg:w-[10vw] md:w-[20vw] md:h-[4vh] lg:h-[6vh]">
                                                                             ADD TO CART
                                                                         </button>
                                                                     )
@@ -256,7 +260,7 @@ const CustomerCartPage = () => {
                                 </div>
                             </div>
                             :
-                            <div className="flex flex-col md:grid md:grid-cols-2 md:gap-3 lg:grid-cols-3 shrink-0">
+                            <div className={`flex flex-col md:grid md:grid-cols-2 md:gap-3 lg:grid-cols-3 shrink-0`}>
                                 {
                                     cartList?.data.map((items, index) => (
                                         <div key={index} onClick={() => {
@@ -429,8 +433,8 @@ const CustomerCartPage = () => {
                             >
                             </div>
 
-                            <div className="fixed top-1/2 -translate-y-1/2 left-1/2 z-50 -translate-x-1/2 text-justify p-4 h-auto w-[90vw] md:w-[60vw] lg:w-[50vw] font-bold text-sm title-header bg-black/20 rounded-xl">
-                                <CustomerAddToCartPage setCartClicked={setCartClicked} />
+                            <div className="fixed top-1/2 -translate-y-1/2 left-1/2 z-50 -translate-x-1/2 text-justify p-4 h-auto w-[90vw] md:w-[60vw] lg:w-[30vw] font-bold text-sm title-header bg-black/20 rounded-xl">
+                                <CustomerAddCartPage setAddCartClick={setAddCartClick} />
                             </div>
                         </>
                     }

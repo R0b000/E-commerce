@@ -8,7 +8,7 @@ import customerSvc from "../../service/customer.service";
 import CustomerAddToCartPage from "../Customer/CustomerAddToCartPage";
 
 const SearchPage = () => {
-    const { searchValue, setAntdSearchClick, loggedInUser, setSearchClick, setSearchValue } = useAppContext();
+    const { searchValue, setAntdSearchClick, loggedInUser, setSearchClick, setSearchValue, menuClick } = useAppContext();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [searchDetails, setSearchDetails] = useState<ListProductDetails[]>([]);
     const [cartProductIds, setCartProductIds] = useState<any | null>(null)
@@ -86,7 +86,7 @@ const SearchPage = () => {
                             </div>
                         </div>
                         <div className="flex flex-col w-full gap-5 px-5 ">
-                            <div className="flex flex-col w-full gap-2 items-center justify-center overflow-hidden md:grid md:grid-cols-3 xl:grid-cols-5">
+                            <div className={`flex flex-col w-full gap-2 items-center justify-center overflow-hidden md:grid md:grid-cols-3 ${menuClick ? 'lg:grid-cols-4' : 'lg:grid-cols-5'}`}>
                                 {searchDetails.length > 0 ? (
                                     searchDetails.map((item) => (
                                         <div key={item._id}

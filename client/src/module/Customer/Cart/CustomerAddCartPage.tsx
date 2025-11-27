@@ -1,24 +1,23 @@
 import { yupResolver } from "@hookform/resolvers/yup"
 import { Controller, useForm } from "react-hook-form"
+import { CartValidationDTO, type cartValidationProps } from "../customer.validator"
 import { InputNumber } from "antd"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { useCallback, useEffect, useState } from "react"
-import publicSvc from "../../service/public.service"
-import type { ListProductDetails } from "../HomePage/homepage.validation"
+import publicSvc from "../../../service/public.service"
+import type { ListProductDetails } from "../../HomePage/homepage.validation"
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai"
 import { ImSpinner9 } from "react-icons/im"
-import customerSvc from "../../service/customer.service"
-import type { ProductCartProps } from "./ProductViewPage"
-import { CartValidationDTO, type cartValidationProps } from "../Customer/customer.validator"
+import customerSvc from "../../../service/customer.service"
+import type { CustomerCartPageProps } from "./CustomerCartPage"
 
-const ProductAddToCart = ({ setCartClicked, buyClick }: ProductCartProps) => {
+const CustomerAddCartPage = ({ setAddCartClick }: CustomerCartPageProps) => {
     const [searchParams] = useSearchParams();
     const productId = searchParams.get('id')
     const [productDetails, setProductDetails] = useState<ListProductDetails | null>(null)
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [quantity, setQuantity] = useState<number>(1)
     const navigate = useNavigate();
-    const type = searchParams.get('type')
 
     const fetchProductDetails = useCallback(async (id: string) => {
         try {
@@ -31,6 +30,11 @@ const ProductAddToCart = ({ setCartClicked, buyClick }: ProductCartProps) => {
         }
     }, [])
 
+    useEffect(() => {
+        if (productId) {
+            fetchProductDetails(productId)
+        }
+    }, [productId])
 
     const { control, handleSubmit, formState: { isSubmitting }, setValue } = useForm({
         defaultValues: {
@@ -45,29 +49,13 @@ const ProductAddToCart = ({ setCartClicked, buyClick }: ProductCartProps) => {
 
     const onSubmit = async (data: cartValidationProps, id: string) => {
         try {
-            console.log(data)
-            if (type === 'cart') {
-                await customerSvc.addToCart(data, id);
-            } else {
-                const response = await customerSvc.addToCart(data, id)
-                const cartId = response.data.data._id
-                const cashPayResponse = await customerSvc.checkout(cartId!)
-                const orderItemId = cashPayResponse.data._id
-                const onlineResponse = await customerSvc.onlinePayment(orderItemId!)
-                window.location.href = (`${onlineResponse.data.data.payment_url}`);
-            }
-            setCartClicked(false)
+            await customerSvc.addToCart(data, id)
+            setAddCartClick(false)
         } catch (error) {
             console.log(error)
             throw error
         }
     }
-
-    useEffect(() => {
-        if (productId) {
-            fetchProductDetails(productId)
-        }
-    }, [productId])
 
     return (
         <>
@@ -78,8 +66,8 @@ const ProductAddToCart = ({ setCartClicked, buyClick }: ProductCartProps) => {
                             {productDetails?.title}
                         </h2>
                     </div>
-                    <div className="flex w-full h-[5vh] shrink-0 mt-5">
-                        <h2 className="flex gap-2 text-base header-title items-center justify-center">
+                    <div className="flex w-full h-[5vh] shrink-0 mt-[5vh] md:mt-[1vh]">
+                        <h2 className="flex gap-2 text-base items-center justify-center">
                             Price:  {productDetails?.currency}  {(productDetails?.price ?? 0) / 100}
                         </h2>
                     </div>
@@ -93,7 +81,7 @@ const ProductAddToCart = ({ setCartClicked, buyClick }: ProductCartProps) => {
                                     <button type="button" onClick={() => {
                                         setQuantity((prev) => Math.max(1, (prev - 1)))
                                         setValue('items.quantity', quantity)
-                                    }} className="border border-gray-300 cursor-pointer rounded-md w-[15vw] md:w-[8vw] lg:w-[3vw] items-center justify-center flex">
+                                    }} className="border border-gray-300 rounded-md w-[15vw] md:w-[9vw] items-center justify-center flex">
                                         <AiOutlineMinus />
                                     </button>
                                     <Controller
@@ -122,8 +110,7 @@ const ProductAddToCart = ({ setCartClicked, buyClick }: ProductCartProps) => {
                                             const newValue = Math.min(maxStock, quantity + 1)
                                             setQuantity(newValue)
                                             setValue('items.quantity', newValue)
-                                        }}
-                                        className="border border-gray-300 cursor-pointer rounded-md w-[15vw] md:w-[8vw] lg:w-[3vw] items-center justify-center flex"
+                                        }} className="border border-gray-300 rounded-md w-[15vw] md:w-[9vw] items-center justify-center flex"
                                     >
                                         <AiOutlinePlus />
                                     </button>
@@ -140,37 +127,30 @@ const ProductAddToCart = ({ setCartClicked, buyClick }: ProductCartProps) => {
                                     </h3>
                                 </div>
                             </div>
-                            <div className="flex gap-2 w-full">
+                            <div className="flex gap-2 w-full ">
                                 {!isSubmitting &&
-                                    (
-                                        buyClick ?
-                                            <button type="submit" className="flex cursor-pointer hover:scale-105 bg-amber-500 text-base rounded-md w-full h-[6vh] text-white header-title items-center justify-center">
-                                                Buy Now
-                                            </button>
-                                            :
-                                            <button type="submit" className="flex cursor-pointer hover:scale-105 bg-amber-500 rounded-md text-base w-full h-[6vh] text-white header-title items-center justify-center">
-                                                Add To Cart
-                                            </button>
-                                    )
+                                    <button type="submit" className="flex bg-amber-500 text-base rounded-md w-full h-[6vh] text-white header-title items-center justify-center">
+                                        Add To Cart
+                                    </button>
                                 }
                                 {isSubmitting &&
-                                    <button type="submit" className="flex bg-amber-500 rounded-md w-full h-[6vh] text-white header-title items-center justify-center">
+                                    <button type="submit" className="flex bg-amber-500 rounded-md text-base w-full h-[6vh] text-white header-title items-center justify-center">
                                         <ImSpinner9 className="animate-spin" />
                                     </button>
                                 }
                                 <button onClick={() => {
-                                    navigate(`/v1/product/${productId}`)
-                                    setCartClicked(false)
-                                }} className="flex bg-amber-500 cursor-pointer hover:scale-105 rounded-md w-full h-[6vh] text-white header-title items-center justify-center">
+                                    navigate(`customer/cart/${productId}`)
+                                    setAddCartClick(false)
+                                }} className="flex bg-amber-500 rounded-md w-full h-[6vh] text-white header-title items-center justify-center">
                                     Cancel
                                 </button>
                             </div>
                         </div>
-                    </form >
-                </div >
+                    </form>
+                </div>
             }
         </>
     )
 }
 
-export default ProductAddToCart;
+export default CustomerAddCartPage;

@@ -108,80 +108,82 @@ const AdminCategoryUpdatePage = () => {
     return (
         <>
             {!isLoading &&
-                <div className="felx flex-col">
-                    <p className="flex text-lg w-full mb-3 md:text-2xl">
-                        Update Cateogry
-                    </p>
-                    <form onSubmit={handleSubmit(() => onSubmit(id))} className="flex w-full">
-                        <div className="flex flex-col gap-5 w-full md:w-[90vh]">
-                            <div className="flex flex-col h-[20vh] w-full justify-center">
-                                <div className='flex flex-col relative h-[9vh] shrink-0'>
-                                    <Controller
-                                        name='name'
-                                        control={control}
-                                        render={({ field }) => (
-                                            <Input
-                                                {...field}
-                                                style={{ height: '45px' }}
-                                                placeholder="Enter the name of category."
+                <div className="flex w-full h-full items-center justify-center">
+                    <div className="felx flex-col lg:w-[20vw] w-full h-full">
+                        <p className="flex text-sm w-full mb-3 md:text-base">
+                            Update Cateogry
+                        </p>
+                        <form onSubmit={handleSubmit(() => onSubmit(id))} className="flex w-full">
+                            <div className="flex flex-col gap-5 w-full md:w-[90vh]">
+                                <div className="flex flex-col h-[20vh] w-full justify-center">
+                                    <div className='flex flex-col relative h-[9vh] shrink-0'>
+                                        <Controller
+                                            name='name'
+                                            control={control}
+                                            render={({ field }) => (
+                                                <Input
+                                                    {...field}
+                                                    style={{ height: '45px' }}
+                                                    placeholder="Enter the name of category."
+                                                />
+                                            )}
+                                        />
+                                        <div className='absolute bottom-2 left-1 text-red-500/90'>
+                                            {errors.name?.message}
+                                        </div>
+                                    </div>
+                                    <div className='flex relative h-[20vh] w-full items-center'>
+                                        <Controller
+                                            name='image'
+                                            control={control}
+                                            render={({ field }) => (
+                                                <Upload
+                                                    {...field}
+                                                    listType="picture-card"
+                                                    beforeUpload={() => false}
+                                                    fileList={fileList}
+                                                    onPreview={handlePreview}
+                                                    onChange={handleChange}
+                                                    className="bg-white rounded-xl w-full"
+                                                >
+                                                    {fileList.length >= 1 ? null : uploadButton}
+                                                </Upload>
+                                            )}
+                                        />
+                                        {previewImage && (
+                                            <Image
+                                                wrapperStyle={{ display: 'none' }}
+                                                preview={{
+                                                    visible: previewOpen,
+                                                    onVisibleChange: (visible) => setPreviewOpen(visible),
+                                                    afterOpenChange: (visible) => !visible && setPreviewImage(''),
+                                                }}
+                                                src={previewImage}
                                             />
                                         )}
-                                    />
-                                    <div className='absolute bottom-2 left-1 text-red-500/90'>
-                                        {errors.name?.message}
+                                        <div className='absolute bottom-2 left-1 text-red-500/90'>
+                                            {errors.image?.message}
+                                        </div>
                                     </div>
                                 </div>
-                                <div className='flex relative h-[20vh] w-full items-center'>
-                                    <Controller
-                                        name='image'
-                                        control={control}
-                                        render={({ field }) => (
-                                            <Upload
-                                                {...field}
-                                                listType="picture-card"
-                                                beforeUpload={() => false}
-                                                fileList={fileList}
-                                                onPreview={handlePreview}
-                                                onChange={handleChange}
-                                                className="bg-white rounded-xl w-full"
-                                            >
-                                                {fileList.length >= 1 ? null : uploadButton}
-                                            </Upload>
-                                        )}
-                                    />
-                                    {previewImage && (
-                                        <Image
-                                            wrapperStyle={{ display: 'none' }}
-                                            preview={{
-                                                visible: previewOpen,
-                                                onVisibleChange: (visible) => setPreviewOpen(visible),
-                                                afterOpenChange: (visible) => !visible && setPreviewImage(''),
-                                            }}
-                                            src={previewImage}
-                                        />
-                                    )}
-                                    <div className='absolute bottom-2 left-1 text-red-500/90'>
-                                        {errors.image?.message}
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="flex flex-col w-full gap-4">
-                                {!isSubmitting &&
-                                    <button type="submit" className="flex w-full md:text-2xl md:h-[7vh] bg-green-950 text-white header-title items-center justify-center rounded-md h-[6vh]">
-                                        UPDATE BANNER
+                                <div className="flex flex-col w-full gap-4">
+                                    {!isSubmitting &&
+                                        <button type="submit" className="flex w-full md:text-base md:h-[7vh] bg-green-950 text-white header-title items-center justify-center rounded-md h-[6vh]">
+                                            UPDATE BANNER
+                                        </button>
+                                    }
+                                    {isSubmitting &&
+                                        < div className="flex w-full md:text-base md:h-[7vh] bg-green-950 h-full text-white header-title items-center justify-center rounded-md">
+                                            <ImSpinner9 className="animate-spin" />
+                                        </div>
+                                    }
+                                    <button onClick={() => navigate('/admin/category')} className="flex w-full md:text-base md:h-[7vh] bg-gray-500 h-[6vh] text-white header-title items-center justify-center rounded-md">
+                                        CANCEL UPDATE
                                     </button>
-                                }
-                                {isSubmitting &&
-                                    < div className="flex w-full md:text-2xl md:h-[7vh] bg-green-950 h-full text-white header-title items-center justify-center rounded-md">
-                                        <ImSpinner9 className="animate-spin" />
-                                    </div>
-                                }
-                                <button onClick={() => navigate('/admin/category')} className="flex w-full md:text-2xl md:h-[7vh] bg-gray-500 h-[6vh] text-white header-title items-center justify-center rounded-md">
-                                    CANCEL UPDATE
-                                </button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             }
         </>

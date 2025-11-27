@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosConfig = axios.create({
-    baseURL: 'http://127.0.0.1:8001/api',
+    baseURL: import.meta.env.VITE_BASE_URL,
     // timeout: 5000,
     headers: { 'X-Custom-Header': 'foobar' }
 });

@@ -8,14 +8,7 @@ import { useAppContext } from "../../../context/AppContext";
 const AdminLayoutPage = () => {
     const navigate = useNavigate();
     const [viewUser, setViewUser] = useState<boolean>(false)
-    const [vh, setVh] = useState<number>()
-    const [vw, setVw] = useState<number>()
     const {loggedInUser, setLoggedInUser} = useAppContext();
-
-    useEffect(() => {
-        setVw(() => window.innerWidth)
-        setVh(() => window.innerHeight)
-    }, [])
 
     useEffect(() => {
         if(loggedInUser?.role !== 'admin') {
@@ -25,21 +18,21 @@ const AdminLayoutPage = () => {
 
     return (
         <>
-            <div style={{ height: `${vh}px`, width: `${vw}px` }} className="flex flex-col p-2">
+            <div className="flex flex-col p-2 shrink-0" style={{height: `${window.innerHeight}px`, width: `${window.innerWidth}px`}}>
                 <div className="flex items-center justify-center md:shrink-0">
                     <div className="flex fixed top-2 left-1/2 -translate-x-1/2 w-[98%] h-[8vh] md:h-[10vh] z-50 items-center justify-between gap-4 px-4 text-green-800 bg-black/20 rounded-xl">
-                        <AiOutlineHome onClick={() => navigate('/v1/home')} className="text-4xl md:text-6xl " />
-                        <div className="flex h-[3vh] w-[27vw]" onClick={() => navigate('/admin')}>
+                        <AiOutlineHome onClick={() => navigate('/v1/home')} className="text-xl md:text-3xl cursor-pointer" />
+                        <div className="flex h-[3vh] w-[27vw] cursor-pointer" onClick={() => navigate('/admin')}>
                             <img src={Logo} alt="" />
                         </div>
-                        <FaRegCircleUser className="text-4xl md:text-6xl " onClick={() => setViewUser(true)} />
+                        <FaRegCircleUser className="text-xl md:text-3xl cursor-pointer" onClick={() => setViewUser(true)} />
                     </div>
                 </div>
                 <div className="flex w-full h-[9vh] shrink-0 md:h-[12vh]"></div>
                 <div className="relative w-full h-full">
                     {/* Outlet area (main content) */}
                     <div
-                        className={`w-full h-full transition-opacity duration-300 ${viewUser ? 'pointer-events-none opacity-50' : 'pointer-events-auto opacity-100'
+                        className={`w-full h-full transition-opacity duration-300 lg:justify-center lg:flex bg-violet-50 p-2 rounded-md ${viewUser ? 'pointer-events-none opacity-50' : 'pointer-events-auto opacity-100'
                             }`}
                     >
                         <Outlet />
@@ -57,12 +50,12 @@ const AdminLayoutPage = () => {
                                 onClick={(e) => e.stopPropagation()}
                             >
                                 <div className="flex flex-col items-center justify-center">
-                                    <AiOutlineUser className="text-5xl md:text-7xl" />
-                                    <h2 className="text-xl font-semibold mb-2 header-title">{loggedInUser?.name}</h2>
-                                    <h3 className="text-xl font-semibold mb-2 header-title">{loggedInUser?.email}</h3>
+                                    <AiOutlineUser className="text-xl md:text-3xl" />
+                                    <h2 className="text-sm font-semibold mb-2 header-title">{loggedInUser?.name}</h2>
+                                    <h3 className="text-sm font-semibold mb-2 header-title">{loggedInUser?.email}</h3>
                                 </div>
                                 <div className="flex flex-col w-full gap-1 p-2">
-                                    <h3 className="flex w-full header-title text-xl">Logout</h3>
+                                    <h3 className="flex w-full header-title text-sm">Logout</h3>
                                     <div className="flex gap-5">
                                         <button
                                             onClick={() => {
@@ -70,12 +63,12 @@ const AdminLayoutPage = () => {
                                                 localStorage.clear();
                                                 setLoggedInUser(null)
                                             }}
-                                            className="mt-[3vh] bg-green-700 text-white px-3 py-1 rounded-lg w-[50%] h-[5vh]">
+                                            className="mt-[3vh] bg-green-700 cursor-pointer text-base text-white px-3 py-1 rounded-lg w-[50%] h-[5vh]">
                                             YES
                                         </button>
                                         <button
                                             onClick={() => setViewUser(false)}
-                                            className="mt-[3vh] bg-green-700 text-white px-3 py-1 rounded-lg w-[50%] h-[5vh]"
+                                            className="mt-[3vh] bg-green-700 cursor-pointer text-base text-white px-3 py-1 rounded-lg w-[50%] h-[5vh]"
                                         >
                                             NO
                                         </button>

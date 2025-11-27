@@ -1,4 +1,5 @@
 const { message } = require("../banner/banner.validation");
+const productSvc = require("../product/product.service");
 const reviewSvc = require("./review.service");
 
 class ReviewController {
@@ -28,6 +29,13 @@ class ReviewController {
       body.user = req.loggedInUser._id;
 
       const createReviews = await reviewSvc.createReview(body);
+
+      let reviewProduct = await productSvc.getSingleProductById({
+        _id: createReviews.product
+      })
+
+      reviewProduct.totalReviews += 1
+      reviewProduct.save();
 
       res.json({
         data: createReviews,

@@ -74,11 +74,11 @@ const AdminCategoryCreatePage = ({ setAddClick }: AdminCategoryProps) => {
 
     return (
         <>
-            <p className="flex text-lg w-full md:text-2xl">
+            <p className="flex text-sm w-full md:text-base">
                 Create New Cateogry
             </p>
             <form onSubmit={handleSubmit(onSubmit)} className="flex w-full">
-                <div className="flex flex-col gap-5 w-full">
+                <div className="flex flex-col gap-10 w-full">
                     <div className="flex flex-col h-[20vh] w-full justify-center">
                         <div className='flex flex-col relative h-[9vh] shrink-0'>
                             <Controller
@@ -92,12 +92,12 @@ const AdminCategoryCreatePage = ({ setAddClick }: AdminCategoryProps) => {
                                     />
                                 )}
                             />
-                            <div className='absolute bottom-1 left-1 text-red-500/90 text-lg'>
+                            <div className='absolute bottom-1 left-1 text-red-500/90 text-sm'>
                                 {errors.name?.message}
                             </div>
                         </div>
                         <div className='flex flex-col relative h-[20vh] w-full'>
-                            <p className="text-lg px-2 md:text-2xl">Category Picture</p>
+                            <p className="text-sm px-2 md:text-base">Category Picture</p>
                             <Controller
                                 name='image'
                                 control={control}
@@ -133,12 +133,12 @@ const AdminCategoryCreatePage = ({ setAddClick }: AdminCategoryProps) => {
                     </div>
                     <div className="flex w-full h-[6vh]">
                         {!isSubmitting &&
-                            <button type="submit" className="flex w-full md:text-3xl bg-green-950 h-full text-white header-title items-center justify-center rounded-md">
+                            <button type="submit" className="flex w-full md:text-base bg-green-950 h-full text-white header-title items-center justify-center rounded-md">
                                 CREATE CATEGORY
                             </button>
                         }
                         {isSubmitting &&
-                            < div className="flex w-full md:text-3xl bg-green-950 h-full text-white header-title items-center justify-center rounded-md">
+                            < div className="flex w-full md:text-base bg-green-950 h-full text-white header-title items-center justify-center rounded-md">
                                 <ImSpinner9 className="animate-spin" />
                             </div>
                         }

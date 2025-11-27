@@ -25,21 +25,21 @@ const SellerLayoutPage = () => {
 
     return (
         <>
-            <div style={{ height: `${vh}px`, width: `${vw}px` }} className="flex flex-col p-2">
+            <div style={{ height: `${vh}px` }} className="flex flex-col p-2 w-full">
                 <div className="flex items-center justify-center">
                     <div className="flex fixed top-2 left-1/2 -translate-x-1/2 w-[98%] h-[8vh] z-50 items-center justify-between gap-4 px-4 text-green-800 bg-black/20 rounded-xl">
-                        <AiOutlineHome onClick={() => navigate('/v1/home')} className="flex text-4xl md:text-5xl" />
+                        <AiOutlineHome onClick={() => navigate('/v1/home')} className="flex text-2xl md:text-3xl" />
                         <div className="flex h-[3vh] w-[27vw]" onClick={() => navigate('/seller')}>
                             <img src={Logo} alt="" />
                         </div>
-                        <FaRegCircleUser className="flex text-4xl md:text-5xl" onClick={() => setViewUser(true)} />
+                        <FaRegCircleUser className="flex text-2xl md:text-3xl" onClick={() => setViewUser(true)} />
                     </div>
                 </div>
                 <div className="flex w-full h-[9vh] shrink-0"></div>
-                <div className="relative w-full h-full">
+                <div className="relative w-full h-full justify-center flex">
                     {/* Outlet area (main content) */}
                     <div
-                        className={`w-full h-full transition-opacity duration-300 ${viewUser ? 'pointer-events-none opacity-50' : 'pointer-events-auto opacity-100'
+                        className={`flex w-full h-full transition-opacity duration-300 ${viewUser ? 'pointer-events-none opacity-50' : 'pointer-events-auto opacity-100'
                             }`}
                     >
                         <Outlet />

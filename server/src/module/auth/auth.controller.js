@@ -4,8 +4,36 @@ const { randomNumberGeneration } = require("../../utility/helper")
 const authSvc = require("./auth.service")
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const UserModel = require("../user/user.model")
 
 class AuthController {
+    checkEmail = async (req, res, next) => {
+        const email = req.query.email;
+
+        try {
+            const response = await UserModel.findOne({
+                email: email
+            })
+
+            if (response) {
+                return res.json({
+                    code: 404,
+                    message: "Email already exists",
+                    status: "Email duplication"
+                })
+            } else {
+                return res.json({
+                    code: 200,
+                    status: "Email available",
+                    message: "Email is available for registration",
+                    options: null
+                })
+            }
+        } catch (error) {
+            throw error
+        }
+    }
+
     registerUser = async (req, res, next) => {
         try {
             const transformedData = await authSvc.transformRegisterDetails(req)
@@ -254,7 +282,7 @@ class AuthController {
     }
     updateProfile = (req, res, next) => {
         try {
-            
+
             res.json({
                 data: "",
                 code: 200,

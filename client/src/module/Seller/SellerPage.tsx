@@ -65,12 +65,12 @@ const SellerPage = () => {
         <>
             {!isLoading &&
 
-                <>
+                <div className="flex w-full h-full shrink-0">
                     {isProductView ? <Outlet /> :
-                        <>
+                        <div className="flex w-full h-full">
                             {isSellerUpdate ?
                                 <div className="flex flex-col w-full h-full p-4 gap-4 bg-gray-100 rounded-md ">
-                                    <h2 className="text-2xl header-title md:text-3xl">
+                                    <h2 className="text-base header-title md:text-base">
                                         Update Coupon
                                     </h2>
                                     <div className="flex flex-col bg-gray-200 rounded-md p-4 border border-violet-300">
@@ -79,44 +79,42 @@ const SellerPage = () => {
                                 </div> :
                                 <div className="flex flex-col w-full h-full">
                                     <div className="flex flex-col relative">
-                                        <div className="flex flex-col w-full h-auto shrink-0 p-4 gap-2 text-xl bg-gray-100 rounded-md">
-                                            <h2 className="flex header-title text-2xl md:text-3xl">
+                                        <div className="flex flex-col w-full h-auto shrink-0 p-4 gap-2 text-base bg-gray-100 rounded-md">
+                                            <h2 className="flex header-title text-base md:text-base">
                                                 Products
                                             </h2>
                                             <div
-                                                className={`
-                                        flex flex-col text-gray-700 gap-5 border border-violet-200 p-4 rounded-xl w-full h-auto shrink-0 items-center justify-center
-                                        ${addClick ? 'visible' : 'hidden'}
-                                    `}>
+                                                className={`flex flex-col text-gray-700 gap-5 border border-violet-200 overflow-x-clip p-4 rounded-xl h-auto shrink-0 items-center justify-center
+                                                            ${addClick ? 'visible' : 'hidden'}`}>
                                                 <SellerProductCreatePage setAddClick={setAddClick} categoryList={categoryList} />
                                             </div>
                                         </div>
                                         <div className="flex flex-col px-4 pt-2 gap-4">
                                             <div className="flex items-center w-full justify-between">
-                                                <p className="header-title md:text-2xl">
+                                                <p className="header-title md:text-base">
                                                     Existing Products
                                                 </p>
                                                 <div className="text-green-800 font-semibold">
-                                                    <AiOutlinePlusCircle onClick={() => setAddClick((prev) => !prev)} className={`text-4xl md:text-5xl ${addClick && 'hidden'}`} />
-                                                    <AiOutlineMinusCircle onClick={() => setAddClick((prev) => !prev)} className={`text-4xl md:text-5xl ${!addClick && 'hidden'}`} />
+                                                    <AiOutlinePlusCircle onClick={() => setAddClick((prev) => !prev)} className={`text-base md:text-2xl ${addClick && 'hidden'}`} />
+                                                    <AiOutlineMinusCircle onClick={() => setAddClick((prev) => !prev)} className={`text-base md:text-2xl ${!addClick && 'hidden'}`} />
                                                 </div>
                                             </div>
-                                            <div className="flex flex-col w-full h-auto rounded-md gap-4 bg-gray-50 py-2">
+                                            <div className="flex flex-col w-full h-auto rounded-md gap-4 bg-gray-50 py-2 md:grid md:grid-cols-2 lg:grid-cols-3">
                                                 {productList?.data.map((items, index) => (
                                                     <div key={index} onClick={() => navigate(`view/${items._id}`)} className="flex border-violet-400 border rounded-md">
                                                         <div className="flex gap-2 h-[10vh] w-full shrink-0 items-center justify-between bg-gray-100 p-2 rounded-md">
-                                                            <p className="flex text-lg md:text-2xl">
+                                                            <p className="flex text-sm md:text-base">
                                                                 {items.title}
                                                             </p>
                                                             <div className="flex gap-4 text-white">
                                                                 <AiOutlineEdit size={30} onClick={(e) => {
                                                                     e.stopPropagation()
                                                                     navigate(`update/${items._id}`)
-                                                                }} className="bg-blue-800 rounded-md w-[10vw] h-[10vw] p-2" />
+                                                                }} className="bg-blue-800 rounded-md w-[10vw] h-[10vw] md:w-[5vw] md:h-[5vw] lg:w-[3vw] lg:h-[3vw] p-2" />
                                                                 <AiOutlineDelete size={30} onClick={(e) => {
                                                                     e.stopPropagation()
                                                                     DeleteById(items._id)
-                                                                }} className="bg-red-700 rounded-md p-2 w-[10vw] h-[10vw]" />
+                                                                }} className="bg-red-700 rounded-md p-2 w-[10vw] h-[10vw] md:w-[5vw] md:h-[5vw] lg:w-[3vw] lg:h-[3vw]" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -124,7 +122,7 @@ const SellerPage = () => {
 
                                                 {productList?.data.length === 0 &&
                                                     <div className="flex gap-2 h-[7vh] w-full shrink-0 items-center justify-center">
-                                                        <p className="flex text-lg">
+                                                        <p className="flex text-sm">
                                                             No  Found
                                                         </p>
                                                         <AiOutlineSmile size={25} />
@@ -138,9 +136,9 @@ const SellerPage = () => {
                                     </div>
                                 </div>
                             }
-                        </>
+                        </div>
                     }
-                </>
+                </div>
             }
         </>
     )

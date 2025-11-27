@@ -47,14 +47,14 @@ const AdminCouponCreatePage = ({ setAddClick, categoryList }: AdminCouponPagePro
 
     return (
         <>
-            <p className="flex text-lg w-full md:text-2xl">
+            <p className="flex text-sm w-full md:text-base">
                 Create New Coupon
             </p>
             <form onSubmit={handleSubmit(onSubmit)} className="flex w-full h-auto">
                 <div className="flex flex-col gap-5 w-full h-auto">
                     <div className="flex flex-col w-full justify-center">
                         <div className='flex flex-col relative h-[9vh] shirnk-0'>
-                            <p className="text-lg px-2 md:text-2xl">Coupon Type</p>
+                            <p className="text-sm px-2 md:text-base">Coupon Type</p>
                             <Controller
                                 name='discountType'
                                 control={control}
@@ -75,7 +75,7 @@ const AdminCouponCreatePage = ({ setAddClick, categoryList }: AdminCouponPagePro
                             </div>
                         </div>
                         <div className='flex flex-col relative h-[12vh] shink-0'>
-                            <p className="text-lg px-2 md:text-2xl">Coupon Discount Value</p>
+                            <p className="text-sm px-2 md:text-base">Coupon Discount Value</p>
                             <Controller
                                 name='discountValue'
                                 control={control}
@@ -87,7 +87,7 @@ const AdminCouponCreatePage = ({ setAddClick, categoryList }: AdminCouponPagePro
                                     />
                                 )}
                             />
-                            <div className='absolute bottom-2 left-1 text-red-500/90 text-lg'>
+                            <div className='absolute bottom-2 left-1 text-red-500/90 text-sm'>
                                 {errors.discountValue?.message}
                             </div>
                         </div>

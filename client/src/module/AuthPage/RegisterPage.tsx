@@ -10,10 +10,10 @@ import { useAppContext } from "../../context/AppContext"
 
 const RegisterPage = () => {
     const [clickNext, setClickNext] = useState<boolean>(false)
-    const {setLoginClick} = useAppContext();
+    const { setLoginClick } = useAppContext();
     const navigate = useNavigate()
 
-    const { control, handleSubmit, formState: { errors, isSubmitting }, trigger } = useForm<authRegisterprops>({
+    const { control, handleSubmit, formState: { errors, isSubmitting }, trigger, getValues, setError } = useForm<authRegisterprops>({
         defaultValues: {
             name: "",
             email: "",
@@ -22,7 +22,7 @@ const RegisterPage = () => {
             phone: ''
         },
         resolver: yupResolver(RegisterValidatorDTO),
-        mode: "onSubmit" 
+        mode: "onSubmit"
     })
 
     const submitForm = async (data: authRegisterprops) => {
@@ -68,7 +68,7 @@ const RegisterPage = () => {
                                     <Input
                                         {...field}
                                         style={{ height: '45px' }}
-                                        placeholder="Enter your username"
+                                        placeholder="Enter your email"
                                         prefix={<AiOutlineUser style={{ color: 'rgba(0,0,0,.25)' }} />}
                                     />
                                 )}
@@ -147,16 +147,28 @@ const RegisterPage = () => {
                     <div className={`flex flex-col gap-5
                         ${clickNext ? "hidden" : "visible"} 
                     `}>
-                        <div className='flex w-full p-2 items-center justify-center text-gray-700 underline'>
+                        <div className='flex cursor-pointer w-full p-2 items-center justify-center text-gray-700 underline'>
                             Already have a account? Log In
                         </div>
                         <button
-                            className={`flex bg-green-950 w-full h-[6vh] p-2 rounded-md text-white items-center justify-center header-title text-xl`}
+                            className={`flex cursor-pointer bg-green-950 w-full h-[6vh] p-2 rounded-md text-white items-center justify-center header-title text-xl`}
                             onClick={async () => {
                                 const valid = await trigger(['name', 'email', 'password'])
-                                if(valid) {
-                                    setClickNext(true)
+                                if (!valid) return;
+
+                                let email = getValues('email')
+
+                                const response = await authSvc.checkEmail(email);
+
+                                if (response.data.code === 404) {
+                                    setError("email", {
+                                        type: "manual",
+                                        message: "Email already exists",
+                                    });
+
+                                    return;
                                 }
+                                setClickNext(true);
                             }}
                         >
                             Next
@@ -165,19 +177,19 @@ const RegisterPage = () => {
                     <div className={`flex flex-col gap-7
                         ${clickNext ? "visible" : "hidden"}
                     `}>
-                        <div className='flex w-full p-2 items-center justify-center text-gray-700 underline'>
+                        <div className='flex cursor-pointer w-full p-2 items-center justify-center text-gray-700 underline'>
                             Already have a account? Log In
                         </div>
                         <button
                             className={`
-                                flex bg-green-950 w-full h-[6vh] p-2 rounded-md text-white items-center justify-center header-title text-xl
+                                flex cursor-pointer bg-green-950 w-full h-[6vh] p-2 rounded-md text-white items-center justify-center header-title text-xl
                                 ${isSubmitting ? "disabled" : ""}    
                             `}
                             type='submit'
                         >
                             Register
                         </button>
-                        <div onClick={() => setClickNext(false)} className="flex text-gray-800 w-full border p-3 rounded-md items-center justify-center" >
+                        <div onClick={() => setClickNext(false)} className="flex cursor-pointer text-gray-800 w-full border p-3 rounded-md items-center justify-center" >
                             Back
                         </div>
                     </div>

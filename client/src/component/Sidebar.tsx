@@ -23,59 +23,59 @@ const Sidebar = () => {
             <div className="flex flex-col w-full gap-3 justify-center">
                 <ul className="flex justify-between h-[6vh] items-center text-2xl md:text-4xl p-2 font-semibold header-title">
                     <div className={`${loggedInUser && 'hidden'}`}>
-                        <li className="flex gap-4 items-center justify-center" onClick={() => {
+                        <li className="flex gap-4 items-center justify-center cursor-pointer" onClick={() => {
                             navigate('/auth/login')
                         }}>
                             <FaUserCircle size={33} />Login / Register
                         </li>
                     </div>
                     {(loggedInUser?.role !== 'customer' && loggedInUser !== null) &&
-                        <div onClick={handleRouting} className={`${loggedInUser?.role === 'admin' && 'visible flex gap-2 items-center'}`}>
+                        <div onClick={handleRouting} className={`${loggedInUser?.role === 'admin' && 'cursor-pointer visible flex gap-2 items-center'}`}>
                             <MdDashboard size={45} /> DASHBOARD
                         </div>
                     }
                     {(loggedInUser?.role === 'customer') &&
-                        <h1 className="flex w-full h-[7vh] items-center p-2" onClick={() => {
+                        <h1 className="flex w-full h-[7vh] items-center p-2 cursor-pointer" onClick={() => {
                             setViewUser(true)
                         }}>Profile</h1>
                     }
-                    <li><AiOutlineCloseCircle size={45} onClick={() => setMenuClick(false)} /></li>
+                    <li><AiOutlineCloseCircle className="cursor-pointer" size={45} onClick={() => setMenuClick(false)} /></li>
                 </ul>
                 <span className="flex grow border border-t border-rose-50"></span>
                 <ul className="flex w-full flex-col p-2 gap-6 px-4 text-xl md:text-3xl">
-                    <li className="flex justify-between items-center">
+                    <li className="flex justify-between items-center cursor-pointer">
                         Trending
                         <AiOutlineRight />
                     </li>
-                    <li className="flex justify-between items-center">New Arrival</li>
-                    <li className="flex justify-between items-center">
+                    <li className="flex justify-between items-center cursor-pointer">New Arrival</li>
+                    <li className="flex justify-between items-center cursor-pointer">
                         Women
                         <AiOutlineRight />
                     </li>
-                    <li className="flex justify-between items-center">
+                    <li className="flex justify-between items-center cursor-pointer">
                         Men
                         <AiOutlineRight />
                     </li>
-                    <li className="flex justify-between items-center">
+                    <li className="flex justify-between items-center cursor-pointer">
                         Accessories
                         <AiOutlineRight />
                     </li>
-                    <li className="flex justify-between items-center">
+                    <li className="flex justify-between items-center cursor-pointer">
                         Sale
                         <AiOutlineRight />
                     </li>
                 </ul>
                 <ul className="flex flex-col gap-2 p-2 px-6 md:text-2xl">
-                    <li className="flex items-center">
+                    <li className="flex items-center cursor-pointer">
                         Customer Service
                     </li>
-                    <li className="flex items-center">
+                    <li className="flex items-center cursor-pointer">
                         FAQ
                     </li>
-                    <li className="flex items-center">
+                    <li className="flex items-center cursor-pointer">
                         Contact Us
                     </li>
-                    <li className="flex items-center">
+                    <li className="flex items-center cursor-pointer">
                         Sizing Guide
                     </li>
                 </ul>
@@ -105,12 +105,12 @@ const Sidebar = () => {
                                         localStorage.clear();
                                         setLoggedInUser(null)
                                     }}
-                                    className="mt-[3vh] bg-green-700 text-white px-3 py-1 rounded-lg w-[50%] h-[5vh]">
+                                    className="mt-[3vh] bg-green-700 text-white px-3 py-1 rounded-lg w-[50%] h-[5vh] cursor-pointer">
                                     YES
                                 </button>
                                 <button
                                     onClick={() => setViewUser(false)}
-                                    className="mt-[3vh] bg-green-700 text-white px-3 py-1 rounded-lg w-[50%] h-[5vh]"
+                                    className="mt-[3vh] bg-green-700 text-white px-3 py-1 rounded-lg w-[50%] h-[5vh] cursor-pointer"
                                 >
                                     NO
                                 </button>
