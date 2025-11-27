@@ -4,7 +4,9 @@ require('dotenv').config();
 
 const PORT = process.env.PORT || 8001;
 const URL = `127.0.0.1` || process.env.URL
-
+app.get("/ping", (req, res) => {
+  res.send("pong");
+});
 const httpServer = http.createServer(app);
 
 httpServer.listen(PORT, URL, (error) => {
