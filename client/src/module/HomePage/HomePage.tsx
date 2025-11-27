@@ -158,7 +158,7 @@ const HomePage = () => {
                     <div className={`${menuClick ? "w-full lg:w-[80vw] lg:items-center lg:justify-center" : ""}`}>
                         {/*Main Content*/}
                         <div className={`flex flex-col p-2 lg:mt-2`}>
-                            <div className={`${searchValue ? 'flex visible transition-all duration-300 h-full w-full items-center justify-center mt-[14vh]' : "hidden"}`}>
+                            <div className={`${searchValue ? 'flex visible transition-all duration-300 h-full w-full items-center justify-center lg:mt-[14vh] md:-mt-[1vh]' : "hidden"}`}>
                                 <SearchPage />
                             </div>
                             <div className='flex flex-col w-full h-auto lg:gap-3 lg:items-center lg:justify-center'>

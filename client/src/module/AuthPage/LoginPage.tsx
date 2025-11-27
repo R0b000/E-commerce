@@ -67,11 +67,11 @@ const LoginPage = () => {
                         </div>
                     </div>
                     <div className='flex flex-col gap-7 h-[22vh]'>
-                        <div className='flex w-full p-2 items-center justify-center text-gray-700 underline'>
+                        <div className='flex cursor-pointer w-full p-2 items-center justify-center text-gray-700 underline'>
                             Don't have a account? Join Now?
                         </div>
                         <button
-                            className={`flex bg-green-950 w-full h-[6vh] p-2 rounded-md text-white items-center justify-center header-title text-xl`}
+                            className={`flex cursor-pointer bg-green-950 w-full h-[6vh] p-2 rounded-md text-white items-center justify-center header-title text-xl`}
                             type='submit'
                         >
                             Log In
@@ -80,7 +80,7 @@ const LoginPage = () => {
                             onClick={() => {
                                 navigate('/auth/forget-password')
                             }}
-                            className={`flex bg-gray-400 w-full h-[6vh] p-2 rounded-md text-white items-center justify-center header-title text-xl`}
+                            className={`flex cursor-pointer bg-gray-400 w-full h-[6vh] p-2 rounded-md text-white items-center justify-center header-title text-xl`}
                         >
                             Forget Password
                         </button>

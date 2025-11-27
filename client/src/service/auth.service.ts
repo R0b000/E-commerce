@@ -2,6 +2,15 @@ import axiosConfig from "../config/AxiosConfig";
 import type { authLoginprops, authRegisterprops } from "../module/AuthPage/auth.validation";
 
 class authService {
+    async checkEmail(email: string) {
+        const response = await axiosConfig.get('/auth/register', {
+            params: {
+                email: email
+            }
+        })
+        return response;
+    }
+
     async registerUser(data: authRegisterprops) {
         try {
             const response = await axiosConfig.post('/auth/register', data);

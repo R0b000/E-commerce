@@ -6,6 +6,7 @@ const authCtrl = require('./auth.controller');
 const { registerValidationDTO } = require('./auth.validation');
 
 authRouter.post('/register', uploader().single('avatar'), authValidator(registerValidationDTO), authCtrl.registerUser)
+authRouter.get('/register', authCtrl.checkEmail)
 authRouter.put('/activate/account/:id', authCtrl.activateUser)
 authRouter.post('/login', authCtrl.loginUser)
 authRouter.post('/refresh', authCtrl.refreshToken)

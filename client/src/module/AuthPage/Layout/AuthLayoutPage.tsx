@@ -48,13 +48,13 @@ const AuthLayoutPage = () => {
                                         <button onClick={() => {
                                             navigate('login')
                                             setLoginClick(true)
-                                        }} className={`w-47 h-10 md:h-12 p-2 border border-gray-700 ${loginClick ? "border-green-800" : ""}`}>
+                                        }} className={`cursor-pointer w-47 h-10 md:h-12 p-2 border border-gray-700 ${loginClick ? "border-green-800" : ""}`}>
                                             LOGIN
                                         </button>
                                         <button onClick={() => {
                                             navigate('register')
                                             setLoginClick(false)
-                                        }} className={`w-47 h-10 p-2 md:h-12 border border-gray-700 ${loginClick ? "" : "border-green-800"}`}>
+                                        }} className={`cursor-pointer w-47 h-10 p-2 md:h-12 border border-gray-700 ${loginClick ? "" : "border-green-800"}`}>
                                             REGISTER
                                         </button>
                                     </div >
@@ -83,7 +83,7 @@ const AuthLayoutPage = () => {
                                     </div>
                                     {loginClick &&
                                         <div className="p-2 flex">
-                                            <div className="flex w-full h-[6vh] bg-amber-500 rounded-md shrink-0 p-2 items-center justify-center header-title text-sm text-white">
+                                            <div className="flex w-full h-[6vh] cursor-pointer bg-amber-500 rounded-md shrink-0 p-2 items-center justify-center header-title text-sm text-white">
                                                 <button type="button" onClick={() => navigate('/v1/home')}>
                                                     HomePage
                                                 </button>
